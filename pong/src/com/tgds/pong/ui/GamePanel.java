@@ -117,9 +117,7 @@ public class GamePanel extends JPanel {
 	private void paintBall(Graphics2D g) {
 		g.setColor(BALL_COLOUR);
 		Dimension loc = game.getBallLocation();
-		if (loc != null) {
-			System.out.println("Ball painted at: " + loc);
-		}
+		System.out.println("Ball painted at: " + loc);
 		// TODO: implement this
 	}
 }
