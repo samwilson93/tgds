@@ -26,6 +26,7 @@ public interface PlayerInputReceiver {
 	 * Directions for moving a paddle in
 	 */
 	public enum Direction {
-
+		UP,
+		DOWN;
 	}
 }
