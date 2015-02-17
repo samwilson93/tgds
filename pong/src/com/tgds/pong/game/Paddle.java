@@ -8,8 +8,10 @@
 package com.tgds.pong.game;
 
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Shape;
 
-import com.tgds.pong.game.PlayerInputReceiver.Direction;
+import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -19,13 +21,21 @@ import com.tgds.pong.game.PlayerInputReceiver.Direction;
  */
 public class Paddle extends GameFieldObject {
 
+	/** the width of the paddle */
+	private static final int WIDTH = 20;
+	/** the height of the paddle */
+	private static final int HEIGHT = 100;
+
+	/** the number of pixels the paddle moves each move */
+	private static final int SPEED = 5;
+
 	/**
 	 * Construct a new paddle
 	 * 
 	 * @param loc
 	 */
 	public Paddle(Point loc) {
-		super(loc);
+		super(loc, Paddle.getPaddleShape());
 	}
 
 	/**
@@ -38,11 +48,12 @@ public class Paddle extends GameFieldObject {
 		if (direction == Direction.UP) {
 			// negative because I think Java frames work with the y axis
 			// increasing from top-left downwards
-			yMove = -1;
+			yMove = -SPEED;
 		} else {
-			yMove = 1;
+			yMove = SPEED;
 		}
 		translate(new Point(0, yMove));
+		System.out.println("Moved paddle. New location: " + getLoc());
 	}
 
 	/**
@@ -52,5 +63,15 @@ public class Paddle extends GameFieldObject {
 	public boolean detectCollision(GameFieldObject other) {
 		// TODO implement as part of issue #4
 		return false;
+	}
+
+	/**
+	 * Get a new shape to represent this paddle's shape
+	 */
+	private static Shape getPaddleShape() {
+		int topLeftX = 0 - WIDTH / 2;
+		int topLeftY = 0 - HEIGHT / 2;
+		Shape shape = new Rectangle(topLeftX, topLeftY, WIDTH, HEIGHT);
+		return shape;
 	}
 }

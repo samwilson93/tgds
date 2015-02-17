@@ -8,6 +8,7 @@
 package com.tgds.pong.game;
 
 import java.awt.Point;
+import java.awt.Shape;
 
 /**
  * An item that may appear in the game field.
@@ -16,18 +17,20 @@ import java.awt.Point;
  */
 public abstract class GameFieldObject {
 
-	/**
-	 * the location of this object, within its field.
-	 */
+	/** the location of this object, within its field. */
 	private Point loc;
+
+	/** the shape of this object, centred on its loc */
+	private Shape shape;
 
 	/**
 	 * Constructor
 	 * 
 	 * @param loc the location of the object
 	 */
-	protected GameFieldObject(Point loc) {
+	protected GameFieldObject(Point loc, Shape shape) {
 		this.loc = loc;
+		this.shape = shape;
 	}
 
 	/**
@@ -62,5 +65,12 @@ public abstract class GameFieldObject {
 	 */
 	public Point getLoc() {
 		return loc;
+	}
+
+	/**
+	 * @return the shape of this object
+	 */
+	public Shape getShape() {
+		return shape;
 	}
 }

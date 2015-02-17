@@ -9,6 +9,8 @@ package com.tgds.pong.game;
 
 import java.awt.Point;
 
+import com.tgds.pong.commands.PlayerInputReceiver;
+
 /**
  * Controller class for a paddle.
  * 
@@ -66,5 +68,12 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	public static enum Side {
 		LEFT, RIGHT;
+	}
+
+	/**
+	 * @return
+	 */
+	public Paddle getPaddle() {
+		return paddle;
 	}
 }

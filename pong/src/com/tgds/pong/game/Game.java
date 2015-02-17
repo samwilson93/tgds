@@ -8,10 +8,10 @@
 package com.tgds.pong.game;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.PaddleController.Side;
 
 /**
@@ -28,12 +28,22 @@ public class Game {
 	/** the paddle controllers */
 	private final List<PaddleController> paddleControllers = new ArrayList<>();
 
+	/** the players playing the game */
+	private final List<Player> players = new ArrayList<>();
+
 	/**
 	 * Construct a new game.
 	 */
 	public Game() {
-		paddleControllers.add(new PaddleController(Side.LEFT, this));
-		paddleControllers.add(new PaddleController(Side.RIGHT, this));
+		PaddleController p1control = new PaddleController(Side.LEFT, this);
+		Player p1 = new Player(p1control);
+		PaddleController p2control = new PaddleController(Side.RIGHT, this);
+		Player p2 = new Player(p2control);
+
+		players.add(p1);
+		players.add(p2);
+		paddleControllers.add(p1control);
+		paddleControllers.add(p2control);
 	}
 
 	/**
@@ -47,10 +57,10 @@ public class Game {
 	/**
 	 * @return the current locations of the paddles
 	 */
-	public List<Point> getPaddleLocations() {
-		List<Point> result = new ArrayList<>();
+	public List<Paddle> getPaddles() {
+		List<Paddle> result = new ArrayList<>();
 		for (PaddleController controller : paddleControllers) {
-			result.add(controller.getPaddleLoc());
+			result.add(controller.getPaddle());
 		}
 		return result;
 	}
@@ -60,6 +70,13 @@ public class Game {
 	 */
 	public List<? extends PlayerInputReceiver> getPlayerInputReceivers() {
 		return paddleControllers;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public List<Player> getPlayers() {
+		return players;
 	}
 
 	/**
@@ -80,13 +97,13 @@ public class Game {
 	 * @return the horizontal centre of the playing field
 	 */
 	public int getHorizontalCentre() {
-		return getHeight() / 2;
+		return getWidth() / 2;
 	}
 
 	/**
 	 * @return the vertical centre of the playing field
 	 */
 	public int getVerticalCentre() {
-		return getWidth() / 2;
+		return getHeight() / 2;
 	}
 }
