@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -100,9 +101,9 @@ public class GamePanel extends JPanel {
 	 */
 	private void paintPaddles(Graphics2D g) {
 		g.setColor(PADDLE_COLOUR);
-		List<Dimension> locs = game.getPaddleLocations();
+		List<Point> locs = game.getPaddleLocations();
 		if (locs != null) {
-			for (Dimension loc : locs) {
+			for (Point loc : locs) {
 				System.out.println("Paddle painted at: " + loc);
 				// TODO: implement this
 			}
