@@ -7,6 +7,10 @@
  */
 package com.tgds.pong.ui;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.swing.JFrame;
 
 import com.tgds.pong.game.Game;
@@ -27,14 +31,18 @@ public class GameFrame extends JFrame {
 	/**
 	 * Constructor. Build the frame and show it.
 	 */
-	private GameFrame() {
+	private GameFrame() throws IOException {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Pong");
 
-		gamePanel = new GamePanel(new Game());
+		Game game = new Game();
+		gamePanel = new GamePanel(game);
 		getContentPane().add(gamePanel);
 		pack();
 		setVisible(true);
+		InputStream is = new FileInputStream(
+		        "resources/com/tgds/pong/ui/playerOptions.properties");
+		addKeyListener(new InputHandler(is, game.getPlayers()));
 	}
 
 	/**
@@ -42,7 +50,7 @@ public class GameFrame extends JFrame {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		new GameFrame();
 	}
 
