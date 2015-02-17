@@ -12,11 +12,15 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 import java.util.List;
 
 import javax.swing.JPanel;
 
 import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Paddle;
 
 /**
  * The panel which shows the game.
@@ -46,6 +50,9 @@ public class GamePanel extends JPanel {
 	/** the game which we are displaying */
 	private final Game game;
 
+	/** whether the game is running */
+	private boolean running = true;
+
 	/**
 	 * Constructor
 	 */
@@ -54,6 +61,21 @@ public class GamePanel extends JPanel {
 
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
+
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				while (running) {
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						// do nothing
+					}
+					repaint();
+				}
+			}
+		};
+		t.start();
 	}
 
 	/**
@@ -101,12 +123,22 @@ public class GamePanel extends JPanel {
 	 */
 	private void paintPaddles(Graphics2D g) {
 		g.setColor(PADDLE_COLOUR);
-		List<Point> locs = game.getPaddleLocations();
-		if (locs != null) {
-			for (Point loc : locs) {
-				System.out.println("Paddle painted at: " + loc);
-				// TODO: implement this
+		List<Paddle> paddles = game.getPaddles();
+		for (Paddle paddle : paddles) {
+			Shape s = paddle.getShape();
+			Point loc = paddle.getLoc();
+			System.out.println("Drawing shape: " + s + " at: " + loc);
+			AffineTransform transform = new AffineTransform();
+			transform.translate(loc.x, loc.y);
+			g.transform(transform);
+			g.fill(s);
+			try {
+				transform = transform.createInverse();
+			} catch (NoninvertibleTransformException e) {
+				// this should never happen
+				throw new AssertionError(e);
 			}
+			g.transform(transform);
 		}
 	}
 
