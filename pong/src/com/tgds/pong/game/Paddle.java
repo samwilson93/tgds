@@ -18,9 +18,7 @@ import com.tgds.pong.game.PlayerInputReceiver.Direction;
  * @author jdl
  */
 public class Paddle extends GameFieldObject {
-	
-	private int yLocation = 0;
-	
+
 	/**
 	 * Construct a new paddle
 	 * 
@@ -29,20 +27,22 @@ public class Paddle extends GameFieldObject {
 	public Paddle(Point loc) {
 		super(loc);
 	}
-	
+
 	/**
-	 * @Override
-	 * Construct a new paddle
+	 * @Override Construct a new paddle
 	 * 
 	 * @param loc
 	 */
 	public void move(Direction direction) {
+		int yMove = 0;
 		if (direction == Direction.UP) {
-			//negative because I think Java frames work with the y axis increasing from top-left downwards
-			yLocation--;
+			// negative because I think Java frames work with the y axis
+			// increasing from top-left downwards
+			yMove = -1;
 		} else {
-			yLocation++;
+			yMove = 1;
 		}
+		translate(new Point(0, yMove));
 	}
 
 	/**
@@ -53,5 +53,4 @@ public class Paddle extends GameFieldObject {
 		// TODO implement as part of issue #4
 		return false;
 	}
-
 }

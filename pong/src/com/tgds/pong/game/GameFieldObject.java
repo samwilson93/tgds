@@ -44,7 +44,7 @@ public abstract class GameFieldObject {
 	 * @param vector the new position of the object, relative to its current
 	 *            position.
 	 */
-	protected void move(Point vector) {
+	protected void translate(Point vector) {
 		loc.translate(vector.x, vector.y);
 	}
 
