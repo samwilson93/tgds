@@ -24,6 +24,9 @@ public class PaddleController implements PlayerInputReceiver {
 	/** the paddle which is controlled by this controller */
 	private final Paddle paddle;
 
+	/** the current direction of travel of the paddle - null if not moving */
+	private Direction direction;
+
 	/**
 	 * Constructor - create a new controller and the paddle to go along with it.
 	 * 
@@ -46,6 +49,32 @@ public class PaddleController implements PlayerInputReceiver {
 		y = game.getVerticalCentre();
 
 		paddle = new Paddle(new Point(x, y));
+		direction = null;
+
+		startMoveThread();
+	}
+
+	/**
+	 * Start the thread to control movement of the paddle
+	 */
+	private void startMoveThread() {
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+
+					try {
+						Thread.sleep(100);
+					} catch (InterruptedException e) {
+						// do nothing
+					}
+					if (direction != null) {
+						paddle.move(direction);
+					}
+				}
+			}
+		};
+		t.start();
 	}
 
 	/**
@@ -53,7 +82,15 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	@Override
 	public void movePaddle(Direction direction) {
-		paddle.move(direction);
+		this.direction = direction;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void stopPaddle() {
+		direction = null;
 	}
 
 	/**

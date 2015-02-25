@@ -53,7 +53,6 @@ public class Paddle extends GameFieldObject {
 			yMove = SPEED;
 		}
 		translate(new Point(0, yMove));
-		System.out.println("Moved paddle. New location: " + getLoc());
 	}
 
 	/**

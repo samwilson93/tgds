@@ -32,8 +32,6 @@ public class PaddleMoveCommand extends Command {
 	 */
 	@Override
 	public void execute() {
-		System.out.println("Executing player move command: Player="
-		        + getPlayer() + ", direction=" + direction);
 		getPlayer().getInputReceiver().movePaddle(direction);
 	}
 }

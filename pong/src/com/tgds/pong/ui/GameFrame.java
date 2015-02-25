@@ -42,7 +42,8 @@ public class GameFrame extends JFrame {
 		setVisible(true);
 		InputStream is = new FileInputStream(
 		        "resources/com/tgds/pong/ui/playerOptions.properties");
-		addKeyListener(new InputHandler(is, game.getPlayers()));
+		InputHandler handler = new InputHandler(is, game.getPlayers());
+		super.addKeyListener(handler);
 	}
 
 	/**

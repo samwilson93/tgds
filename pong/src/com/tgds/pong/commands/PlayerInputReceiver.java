@@ -23,6 +23,11 @@ public interface PlayerInputReceiver {
 	void movePaddle(Direction direction);
 
 	/**
+	 * receive a command to stop moving, and respond to it.
+	 */
+	void stopPaddle();
+
+	/**
 	 * Directions for moving a paddle in
 	 */
 	public enum Direction {

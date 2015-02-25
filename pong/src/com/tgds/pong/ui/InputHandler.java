@@ -18,6 +18,7 @@ import java.util.Properties;
 
 import com.tgds.pong.commands.Command;
 import com.tgds.pong.commands.PaddleMoveCommand;
+import com.tgds.pong.commands.PaddleStopMovingCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;
 
@@ -112,7 +113,7 @@ public class InputHandler implements KeyListener {
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// nothing to do
+
 	}
 
 	/**
@@ -120,7 +121,14 @@ public class InputHandler implements KeyListener {
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// nothing to do
+		int key = e.getKeyCode();
+		Player player = decodePlayer(key);
+		Function func = keyMap.get(key);
+		if (func != null) {
+			System.out.println("Key released.");
+			Command com = new PaddleStopMovingCommand(player);
+			com.execute();
+		}
 	}
 
 	/**

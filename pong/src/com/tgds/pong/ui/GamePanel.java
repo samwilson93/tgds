@@ -15,6 +15,7 @@ import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -47,6 +48,9 @@ public class GamePanel extends JPanel {
 	/** the thickness of the net, in pixels */
 	private static final int NET_THICKNESS = 2;
 
+	/** target FPS */
+	private static final int TARGET_FPS = 60;
+
 	/** the game which we are displaying */
 	private final Game game;
 
@@ -62,12 +66,20 @@ public class GamePanel extends JPanel {
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
 
+		launchUpdateThread();
+	}
+
+	/**
+	 * Launch the thread responsible for updating the graphics of this panel.
+	 */
+	private void launchUpdateThread() {
 		Thread t = new Thread() {
 			@Override
 			public void run() {
 				while (running) {
+
 					try {
-						Thread.sleep(50);
+						Thread.sleep(1000 / TARGET_FPS);
 					} catch (InterruptedException e) {
 						// do nothing
 					}
@@ -83,11 +95,14 @@ public class GamePanel extends JPanel {
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
+		BufferedImage img = new BufferedImage(getWidth(), getHeight(),
+		        BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = (Graphics2D) img.getGraphics();
 		paintBackground(g2);
 		paintNet(g2);
 		paintPaddles(g2);
 		paintBall(g2);
+		g.drawImage(img, 0, 0, null);
 	}
 
 	/**
@@ -127,7 +142,6 @@ public class GamePanel extends JPanel {
 		for (Paddle paddle : paddles) {
 			Shape s = paddle.getShape();
 			Point loc = paddle.getLoc();
-			System.out.println("Drawing shape: " + s + " at: " + loc);
 			AffineTransform transform = new AffineTransform();
 			transform.translate(loc.x, loc.y);
 			g.transform(transform);
@@ -135,7 +149,8 @@ public class GamePanel extends JPanel {
 			try {
 				transform = transform.createInverse();
 			} catch (NoninvertibleTransformException e) {
-				// this should never happen
+				// this should never happen - only a translate has been applied,
+				// and that is invertible
 				throw new AssertionError(e);
 			}
 			g.transform(transform);
