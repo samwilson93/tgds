@@ -125,7 +125,6 @@ public class InputHandler implements KeyListener {
 		Player player = decodePlayer(key);
 		Function func = keyMap.get(key);
 		if (func != null) {
-			System.out.println("Key released.");
 			Command com = new PaddleStopMovingCommand(player);
 			com.execute();
 		}
