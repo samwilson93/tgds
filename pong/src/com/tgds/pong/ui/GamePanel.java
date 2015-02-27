@@ -11,11 +11,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import javax.swing.JPanel;
 
 import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Paddle;
 
 /**
  * The panel which shows the game.
@@ -42,8 +48,14 @@ public class GamePanel extends JPanel {
 	/** the thickness of the net, in pixels */
 	private static final int NET_THICKNESS = 2;
 
+	/** target FPS */
+	private static final int TARGET_FPS = 60;
+
 	/** the game which we are displaying */
 	private final Game game;
+
+	/** whether the game is running */
+	private boolean running = true;
 
 	/**
 	 * Constructor
@@ -53,6 +65,29 @@ public class GamePanel extends JPanel {
 
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
+
+		launchUpdateThread();
+	}
+
+	/**
+	 * Launch the thread responsible for updating the graphics of this panel.
+	 */
+	private void launchUpdateThread() {
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				while (running) {
+
+					try {
+						Thread.sleep(1000 / TARGET_FPS);
+					} catch (InterruptedException e) {
+						// do nothing
+					}
+					repaint();
+				}
+			}
+		};
+		t.start();
 	}
 
 	/**
@@ -60,11 +95,14 @@ public class GamePanel extends JPanel {
 	 */
 	@Override
 	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
+		BufferedImage img = new BufferedImage(getWidth(), getHeight(),
+		        BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = (Graphics2D) img.getGraphics();
 		paintBackground(g2);
 		paintNet(g2);
 		paintPaddles(g2);
 		paintBall(g2);
+		g.drawImage(img, 0, 0, null);
 	}
 
 	/**
@@ -100,12 +138,22 @@ public class GamePanel extends JPanel {
 	 */
 	private void paintPaddles(Graphics2D g) {
 		g.setColor(PADDLE_COLOUR);
-		List<Dimension> locs = game.getPaddleLocations();
-		if (locs != null) {
-			for (Dimension loc : locs) {
-				System.out.println("Paddle painted at: " + loc);
-				// TODO: implement this
+		List<Paddle> paddles = game.getPaddles();
+		for (Paddle paddle : paddles) {
+			Shape s = paddle.getShape();
+			Point loc = paddle.getLoc();
+			AffineTransform transform = new AffineTransform();
+			transform.translate(loc.x, loc.y);
+			g.transform(transform);
+			g.fill(s);
+			try {
+				transform = transform.createInverse();
+			} catch (NoninvertibleTransformException e) {
+				// this should never happen - only a translate has been applied,
+				// and that is invertible
+				throw new AssertionError(e);
 			}
+			g.transform(transform);
 		}
 	}
 
