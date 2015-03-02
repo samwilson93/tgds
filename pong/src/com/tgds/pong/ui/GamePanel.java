@@ -73,11 +73,10 @@ public class GamePanel extends JPanel {
 	 * Launch the thread responsible for updating the graphics of this panel.
 	 */
 	private void launchUpdateThread() {
-		Thread t = new Thread() {
+		Thread t = new Thread("UI Painting") {
 			@Override
 			public void run() {
 				while (running) {
-
 					try {
 						Thread.sleep(1000 / TARGET_FPS);
 					} catch (InterruptedException e) {
@@ -165,7 +164,6 @@ public class GamePanel extends JPanel {
 	private void paintBall(Graphics2D g) {
 		g.setColor(BALL_COLOUR);
 		Dimension loc = game.getBallLocation();
-		System.out.println("Ball painted at: " + loc);
 		// TODO: implement this
 	}
 }
