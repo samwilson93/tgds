@@ -7,6 +7,7 @@
  */
 package com.tgds.pong.commands;
 
+
 /**
  * Receiver for player input. Any player will call these methods in order to
  * control a paddle.

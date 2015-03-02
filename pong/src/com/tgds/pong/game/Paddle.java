@@ -11,15 +11,13 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.commands.PlayerInputReceiver.Direction;
-
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
  * movement by moving.
  * 
  * @author jdl
  */
-public class Paddle extends GameFieldObject {
+public class Paddle extends MobileGameFieldObject {
 
 	/** the width of the paddle */
 	private static final int WIDTH = 20;
@@ -36,23 +34,6 @@ public class Paddle extends GameFieldObject {
 	 */
 	public Paddle(Point loc) {
 		super(loc, Paddle.getPaddleShape());
-	}
-
-	/**
-	 * @Override Construct a new paddle
-	 * 
-	 * @param loc
-	 */
-	public void move(Direction direction) {
-		int yMove = 0;
-		if (direction == Direction.UP) {
-			// negative because I think Java frames work with the y axis
-			// increasing from top-left downwards
-			yMove = -SPEED;
-		} else {
-			yMove = SPEED;
-		}
-		translate(new Point(0, yMove));
 	}
 
 	/**
