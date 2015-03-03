@@ -9,6 +9,7 @@ package com.tgds.pong.game;
 
 import java.awt.Point;
 import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 
 /**
  * An item that may appear in the game field.
@@ -39,7 +40,23 @@ public abstract class GameFieldObject {
 	 * @param other another gameFieldObject to check for collisions with
 	 * @return true if the two objects intersect
 	 */
-	public abstract boolean detectCollision(GameFieldObject other);
+	public boolean detectCollision(GameFieldObject other) {
+		Shape otherShape = other.getShape();
+		Shape thisShape = this.getShape();
+		Rectangle2D boundsOther = otherShape.getBounds2D();
+		Rectangle2D boundsThis = thisShape.getBounds2D();
+		
+		if(boundsThis.getX() < boundsOther.getX() + boundsOther.getWidth() &&
+		   boundsThis.getX() + boundsThis.getWidth() > boundsOther.getX() &&
+		   boundsThis.getY() < boundsOther.getY() + boundsOther.getHeight() &&
+		   boundsThis.getY() + boundsThis.getHeight() > boundsOther.getY()){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public abstract void reactCollision(GameFieldObject other);
 
 	/**
 	 * Translate the location of this object within its field.
