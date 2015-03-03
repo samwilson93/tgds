@@ -27,6 +27,9 @@ public class Game {
 
 	/** the paddle controllers */
 	private final List<PaddleController> paddleControllers = new ArrayList<>();
+	
+	/** the ball */
+	private BallController ballController = null;
 
 	/** all the objects within the game that update with time */
 	private final List<GameTimedObject> updateList = new ArrayList<>();
@@ -45,6 +48,8 @@ public class Game {
 		Player p1 = new Player(p1control);
 		PaddleController p2control = new PaddleController(Side.RIGHT, this);
 		Player p2 = new Player(p2control);
+		
+		ballController = new BallController(this);
 
 		players.add(p1);
 		players.add(p2);
@@ -53,6 +58,9 @@ public class Game {
 
 		updateList.add(p1control.getPaddle());
 		updateList.add(p2control.getPaddle());
+		updateList.add(ballController.getBall());
+		
+		ballController.setStartVelocity();
 
 		setRunning(true);
 		startGameLoop();
@@ -121,9 +129,9 @@ public class Game {
 	/**
 	 * @return the current location of the ball
 	 */
-	public Dimension getBallLocation() {
+	public Ball getBallLocation() {
 		// TODO: implement this
-		return null;
+		return ballController.getBall();
 	}
 
 	/**
