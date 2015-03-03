@@ -16,9 +16,6 @@ public class Ball extends MobileGameFieldObject {
 	/** the height of the ball */
 	private static final int HEIGHT = 20;
 
-	/** the number of pixels the ball moves each move */
-	private static final int SPEED = 5;
-	
 	/**
 	 * Construct a new ball
 	 * 

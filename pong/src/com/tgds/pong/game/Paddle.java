@@ -24,9 +24,6 @@ public class Paddle extends MobileGameFieldObject {
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
 
-	/** the number of pixels the paddle moves each move */
-	private static final int SPEED = 5;
-
 	/**
 	 * Construct a new paddle
 	 * 

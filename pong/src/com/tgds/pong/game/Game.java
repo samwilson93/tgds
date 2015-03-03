@@ -7,7 +7,6 @@
  */
 package com.tgds.pong.game;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Game {
 
 	/** the paddle controllers */
 	private final List<PaddleController> paddleControllers = new ArrayList<>();
-	
+
 	/** the ball */
 	private BallController ballController = null;
 
@@ -48,7 +47,7 @@ public class Game {
 		Player p1 = new Player(p1control);
 		PaddleController p2control = new PaddleController(Side.RIGHT, this);
 		Player p2 = new Player(p2control);
-		
+
 		ballController = new BallController(this);
 
 		players.add(p1);
@@ -59,7 +58,7 @@ public class Game {
 		updateList.add(p1control.getPaddle());
 		updateList.add(p2control.getPaddle());
 		updateList.add(ballController.getBall());
-		
+
 		ballController.setStartVelocity();
 
 		setRunning(true);
@@ -79,7 +78,6 @@ public class Game {
 						for (GameTimedObject obj : updateList) {
 							obj.update();
 						}
-						long current = System.currentTimeMillis();
 						try {
 							Thread.sleep(stepTime);
 						} catch (InterruptedException e) {
