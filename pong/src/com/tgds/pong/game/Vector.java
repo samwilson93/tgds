@@ -10,7 +10,9 @@ package com.tgds.pong.game;
 import java.awt.Point;
 
 /**
- * A 2 dimensional vector for use in the game.
+ * A 2 dimensional vector for use in the game. Performs automatic conversion
+ * between Cartesian and polar types. Create new vectors by calling
+ * {@link #cartesian(double, double)} and {@link #polar(double, double)}.
  * 
  * @author jdl
  */
