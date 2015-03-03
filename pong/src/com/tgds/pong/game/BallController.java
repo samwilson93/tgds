@@ -6,6 +6,9 @@ public class BallController {
 
 	/** the speed of the paddle */
 	private static final int SPEED = 5;
+	
+	/** the initial angle that the ball begins moving towards */
+	private static final int START_ANGLE = 45;
 
 	/** the ball which is controlled by this controller */
 	private final Ball ball;
@@ -52,10 +55,8 @@ public class BallController {
 	 * starts ball moving at set speed, 	
 	 */
 	public void setStartVelocity() {
-		//TODO to fix in this issue
-		
-		//Vector startVelocity = new Vector(5, 5);
-		//ball.setVelocity(startVelocity);
+		Vector startVelocity = Vector.polar(SPEED, START_ANGLE);
+		ball.setVelocity(startVelocity);
 		
 	}
 }
