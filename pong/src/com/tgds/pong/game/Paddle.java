@@ -10,7 +10,6 @@ package com.tgds.pong.game;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.geom.Rectangle2D;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -61,6 +60,15 @@ public class Paddle extends MobileGameFieldObject {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean detectCollision(GameFieldObject other) {
+		// TODO implement as part of issue #4
+		return false;
+	}
+
+	/**
 	 * Get a new shape to represent this paddle's shape
 	 */
 	private static Shape getPaddleShape() {
@@ -68,18 +76,5 @@ public class Paddle extends MobileGameFieldObject {
 		int topLeftY = 0 - HEIGHT / 2;
 		Shape shape = new Rectangle(topLeftX, topLeftY, WIDTH, HEIGHT);
 		return shape;
-	}
-
-	@Override
-	public void reactCollision(GameFieldObject other) {
-		Class<?> otherClass = other.getClass();
-		if(otherClass.getName() == "Wall"){
-			//Stop moving that direction (Or we could have it bounce a bit?)
-		}
-		if(otherClass.getName() == "Ball"){
-			//Do nothing (As the ball will move) 
-			//TODO: Remove this if statement, is just for explanations sake
-		}
-		//And hopefully it won't collide with another paddle otherwise we might have some problems
 	}
 }
