@@ -8,6 +8,8 @@
 package com.tgds.pong.game;
 
 import java.awt.Point;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.tgds.pong.commands.PlayerInputReceiver;
 
@@ -21,11 +23,27 @@ public class PaddleController implements PlayerInputReceiver {
 	/** the horizontal distance from the goal line that the paddle sits at */
 	private static final int X_DISTANCE = 25;
 
+	/** the acceleration vector of the paddle when it is being accelerated */
+	private static final double ACCELERATION = 1;
+
+	/** the angle of each direction */
+	private final static Map<Direction, Vector> ACCELERATION_VECTORS =
+	        new HashMap<>();
+	static {
+		ACCELERATION_VECTORS.put(
+		        Direction.UP, Vector.polar(ACCELERATION, 270.0));
+		ACCELERATION_VECTORS.put(
+		        Direction.DOWN, Vector.polar(ACCELERATION, 90.0));
+	}
+
+	/** the coefficient of friction for the paddle */
+	private static final double FRICTION_COEFFICIENT = 0.92;
+
+	/** the maximum speed of the paddle */
+	private static final int MAX_SPEED = 5;
+
 	/** the paddle which is controlled by this controller */
 	private final Paddle paddle;
-
-	/** the current direction of travel of the paddle - null if not moving */
-	private Direction direction;
 
 	/**
 	 * Constructor - create a new controller and the paddle to go along with it.
@@ -49,32 +67,9 @@ public class PaddleController implements PlayerInputReceiver {
 		y = game.getVerticalCentre();
 
 		paddle = new Paddle(new Point(x, y));
-		direction = null;
-
-		startMoveThread();
-	}
-
-	/**
-	 * Start the thread to control movement of the paddle
-	 */
-	private void startMoveThread() {
-		Thread t = new Thread() {
-			@Override
-			public void run() {
-				while (true) {
-
-					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						// do nothing
-					}
-					if (direction != null) {
-						paddle.move(direction);
-					}
-				}
-			}
-		};
-		t.start();
+		paddle.setMaxSpeed(MAX_SPEED);
+		paddle.setFriction(true);
+		paddle.setCoefficientOfFriction(FRICTION_COEFFICIENT);
 	}
 
 	/**
@@ -82,7 +77,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	@Override
 	public void movePaddle(Direction direction) {
-		this.direction = direction;
+		paddle.setAcceleration(ACCELERATION_VECTORS.get(direction));
 	}
 
 	/**
@@ -90,7 +85,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	@Override
 	public void stopPaddle() {
-		direction = null;
+		paddle.setAcceleration(Vector.polar(0.0, 0.0));
 	}
 
 	/**
@@ -101,16 +96,16 @@ public class PaddleController implements PlayerInputReceiver {
 	}
 
 	/**
-	 * Side - the side of the playing field the paddle is on.
-	 */
-	public static enum Side {
-		LEFT, RIGHT;
-	}
-
-	/**
 	 * @return
 	 */
 	public Paddle getPaddle() {
 		return paddle;
+	}
+
+	/**
+	 * Side - the side of the playing field the paddle is on.
+	 */
+	public static enum Side {
+		LEFT, RIGHT;
 	}
 }

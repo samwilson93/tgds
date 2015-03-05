@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.tgds.pong.game.Ball;
 import com.tgds.pong.game.Game;
 import com.tgds.pong.game.Paddle;
 
@@ -73,11 +74,10 @@ public class GamePanel extends JPanel {
 	 * Launch the thread responsible for updating the graphics of this panel.
 	 */
 	private void launchUpdateThread() {
-		Thread t = new Thread() {
+		Thread t = new Thread("UI Painting") {
 			@Override
 			public void run() {
 				while (running) {
-
 					try {
 						Thread.sleep(1000 / TARGET_FPS);
 					} catch (InterruptedException e) {
@@ -164,8 +164,20 @@ public class GamePanel extends JPanel {
 	 */
 	private void paintBall(Graphics2D g) {
 		g.setColor(BALL_COLOUR);
-		Dimension loc = game.getBallLocation();
-		System.out.println("Ball painted at: " + loc);
-		// TODO: implement this
+		Ball ball = game.getBallLocation();
+		Shape s = ball.getShape();
+		Point loc = ball.getLoc();
+		AffineTransform transform = new AffineTransform();
+		transform.translate(loc.x, loc.y);
+		g.transform(transform);
+		g.fill(s);
+		try {
+			transform = transform.createInverse();
+		} catch (NoninvertibleTransformException e) {
+			// this should never happen - only a translate has been applied,
+			// and that is invertible
+			throw new AssertionError(e);
+		}
+		g.transform(transform);
 	}
 }

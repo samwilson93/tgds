@@ -7,7 +7,6 @@
  */
 package com.tgds.pong.game;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +27,17 @@ public class Game {
 	/** the paddle controllers */
 	private final List<PaddleController> paddleControllers = new ArrayList<>();
 
+	/** the ball */
+	private BallController ballController = null;
+
+	/** all the objects within the game that update with time */
+	private final List<GameTimedObject> updateList = new ArrayList<>();
+
 	/** the players playing the game */
 	private final List<Player> players = new ArrayList<>();
+
+	/** whether the game is currently running or not */
+	private boolean running = false;
 
 	/**
 	 * Construct a new game.
@@ -40,18 +48,88 @@ public class Game {
 		PaddleController p2control = new PaddleController(Side.RIGHT, this);
 		Player p2 = new Player(p2control);
 
+		ballController = new BallController(this);
+
 		players.add(p1);
 		players.add(p2);
 		paddleControllers.add(p1control);
 		paddleControllers.add(p2control);
+
+		updateList.add(p1control.getPaddle());
+		updateList.add(p2control.getPaddle());
+		updateList.add(ballController.getBall());
+
+		ballController.setStartVelocity();
+
+		setRunning(true);
+		startGameLoop();
+	}
+
+	/**
+	 * begin the main game loop
+	 */
+	private void startGameLoop() {
+		int stepTime = 1000 / 60;
+		Thread t = new Thread("Game Loop") {
+			@Override
+			public void run() {
+				while (true) {
+					if (isRunning()) {
+						for (GameTimedObject obj : updateList) {
+							obj.update();
+						}
+						try {
+							Thread.sleep(stepTime);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		};
+		t.start();
+	}
+
+	/**
+	 * Add an object to the game to be updated in the game loop.
+	 * 
+	 * @param object the game object to add
+	 */
+	public void addTimedObject(GameTimedObject object) {
+		updateList.add(object);
+	}
+
+	/**
+	 * Remove an object from the game's list.
+	 * 
+	 * @param object the object to remove
+	 */
+	public void removeTimedObject(GameTimedObject object) {
+		updateList.remove(object);
+	}
+
+	/**
+	 * Set whether the game is running or not
+	 * 
+	 * @param value true if the game is running
+	 */
+	public void setRunning(boolean value) {
+		running = value;
+	}
+
+	/**
+	 * @return the value of running - true if the game is currently runnig
+	 */
+	public boolean isRunning() {
+		return running;
 	}
 
 	/**
 	 * @return the current location of the ball
 	 */
-	public Dimension getBallLocation() {
+	public Ball getBallLocation() {
 		// TODO: implement this
-		return null;
+		return ballController.getBall();
 	}
 
 	/**

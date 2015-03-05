@@ -12,23 +12,18 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-import com.tgds.pong.commands.PlayerInputReceiver.Direction;
-
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
  * movement by moving.
  * 
  * @author jdl
  */
-public class Paddle extends GameFieldObject {
+public class Paddle extends MobileGameFieldObject {
 
 	/** the width of the paddle */
 	private static final int WIDTH = 20;
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
-
-	/** the number of pixels the paddle moves each move */
-	private static final int SPEED = 5;
 
 	/**
 	 * Construct a new paddle
@@ -40,6 +35,7 @@ public class Paddle extends GameFieldObject {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * @Override Construct a new paddle
 	 * 
 	 * @param loc
@@ -54,6 +50,14 @@ public class Paddle extends GameFieldObject {
 			yMove = SPEED;
 		}
 		translate(new Point(0, yMove));
+=======
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean detectCollision(GameFieldObject other) {
+		// TODO implement as part of issue #4
+		return false;
+>>>>>>> 65e43ca9444d71ce6ea0e3e529c8077fa8f20008
 	}
 
 	/**
