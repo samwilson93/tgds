@@ -14,6 +14,7 @@ import java.io.InputStream;
 import javax.swing.JFrame;
 
 import com.tgds.pong.game.Game;
+import com.tgds.pong.ui.input.InputHandler;
 
 /**
  * Main frame and method for the game of Pong.
