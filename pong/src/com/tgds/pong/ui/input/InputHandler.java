@@ -9,18 +9,16 @@ package com.tgds.pong.ui.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Properties;
 
 import com.tgds.pong.commands.Command;
 import com.tgds.pong.commands.PaddleMoveCommand;
 import com.tgds.pong.commands.PaddleStopMovingCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;
+
+import config.InputConfig;
 
 /**
  * Handles input from the human players, and converts it into commands which are
@@ -33,33 +31,8 @@ public class InputHandler implements KeyListener {
 	/** the number of players input is configured for */
 	private final static int PLAYERS = 2;
 
-	/** the properties holding the key map */
-	private final Properties properties;
-
-	/** enumeration of expected functions */
-	private enum Function {
-		UP_1("player1-up", 0),
-		UP_2("player2-up", 1),
-		DOWN_1("player1-down", 0),
-		DOWN_2("player2-down", 1);
-
-		/** the name of the property containing the keycode */
-		private String property;
-
-		/**
-		 * the expected index of the player within the list of players this
-		 * command relates to
-		 */
-		private int playerIndex;
-
-		private Function(String property, int playerIndex) {
-			this.property = property;
-			this.playerIndex = playerIndex;
-		}
-	}
-
-	/** mapping of keys to functions */
-	private final Map<Integer, Function> keyMap = new HashMap<>();
+	/** the input configuration */
+	private final InputConfig inputConfig;
 
 	/** the players carrying out the input */
 	private final List<Player> players;
@@ -85,27 +58,7 @@ public class InputHandler implements KeyListener {
 		} else {
 			this.players = players;
 		}
-		properties = new Properties();
-		try {
-			properties.load(propertiesStream);
-		} catch (IOException e) {
-			throw new KeyMappingException("Could not read file.", e);
-		}
-		for (Function func : Function.values()) {
-			String key = func.property;
-			String val = properties.getProperty(key);
-			if (val == null) {
-				throw new KeyMappingException("Missing property: " + key);
-			}
-			try {
-				int keyVal = Integer.parseInt(val);
-				keyMap.put(keyVal, func);
-			} catch (NumberFormatException e) {
-				throw new KeyMappingException("Malformed property: " + key
-				        + "; expected integer but got \"" + "\"", e);
-			}
-
-		}
+		inputConfig = new InputConfig(propertiesStream);
 	}
 
 	/**
@@ -123,7 +76,7 @@ public class InputHandler implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		Player player = decodePlayer(key);
-		Function func = keyMap.get(key);
+		Function func = inputConfig.getFunction(key);
 		if (func != null) {
 			Command com = new PaddleStopMovingCommand(player);
 			com.execute();
@@ -138,9 +91,9 @@ public class InputHandler implements KeyListener {
 		int key = e.getKeyCode();
 		Player player = decodePlayer(key);
 		Direction direction;
-		Function func = keyMap.get(key);
+		Function func = inputConfig.getFunction(key);
 		if (func != null) {
-			switch (keyMap.get(key)) {
+			switch (func) {
 				case UP_1:
 				case UP_2:
 					direction = Direction.UP;
@@ -165,7 +118,7 @@ public class InputHandler implements KeyListener {
 	 *         correspond to a particular player)
 	 */
 	private Player decodePlayer(int keyCode) {
-		Function func = keyMap.get(keyCode);
+		Function func = inputConfig.getFunction(keyCode);
 		if (func == null) {
 			return null;
 		}
