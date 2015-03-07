@@ -34,38 +34,30 @@ public class Paddle extends MobileGameFieldObject {
 	}
 
 	/**
-<<<<<<< HEAD
-	 * @Override Construct a new paddle
-	 * 
-	 * @param loc
-	 */
-	public void move(Direction direction) {
-		int yMove = 0;
-		if (direction == Direction.UP) {
-			// negative because I think Java frames work with the y axis
-			// increasing from top-left downwards
-			yMove = -SPEED;
-		} else {
-			yMove = SPEED;
-		}
-		translate(new Point(0, yMove));
-=======
 	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean detectCollision(GameFieldObject other) {
 		// TODO implement as part of issue #4
 		return false;
->>>>>>> 65e43ca9444d71ce6ea0e3e529c8077fa8f20008
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Respond to a detected collision with another object.
+	 * 
+	 * @param other the other object
 	 */
-	@Override
-	public boolean detectCollision(GameFieldObject other) {
-		// TODO implement as part of issue #4
-		return false;
+	private void reactCollision(GameFieldObject other) {
+		Class<?> otherClass = other.getClass();
+		if (otherClass.getName() == "Wall") {
+			// Stop moving that direction (Or we could have it bounce a bit?)
+		}
+		if (otherClass.getName() == "Ball") {
+			// Do nothing (As the ball will move)
+			// TODO: Remove this if statement, is just for explanations sake
+		}
+		// And hopefully it won't collide with another paddle otherwise we might
+		// have some problems
 	}
 
 	/**
@@ -77,4 +69,5 @@ public class Paddle extends MobileGameFieldObject {
 		Shape shape = new Rectangle(topLeftX, topLeftY, WIDTH, HEIGHT);
 		return shape;
 	}
+
 }
