@@ -1,3 +1,7 @@
 *.class
 bin/*
-
+*/.idea/*
+*.metadata/*
+.recommenders/*
+*.project
+*.classpath
