@@ -14,7 +14,7 @@ import com.tgds.pong.game.Player;
  * 
  * @author jdl
  */
-public class PaddleStopMovingCommand extends Command {
+public class PaddleStopMovingCommand extends PongCommand {
 
 	/**
 	 * Constructor

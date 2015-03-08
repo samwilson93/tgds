@@ -40,18 +40,23 @@ public class InputConfig {
 			keyMap = new HashMap<>();
 			for (Function func : Function.values()) {
 				String key = func.propertyName;
-				String val = properties.getProperty(key);
-				if (val == null) {
-					throw new KeyMappingException("Missing property: " + key);
-				}
-				try {
-					int keyVal = Integer.parseInt(val);
-					keyMap.put(keyVal, func);
-				} catch (NumberFormatException e) {
-					throw new KeyMappingException("Malformed property: " + key
-					        + "; expected integer but got \"" + "\"", e);
-				}
 
+				// only get properties where we expect them
+				if (key != null) {
+					String val = properties.getProperty(key);
+					if (val == null) {
+						throw new KeyMappingException("Missing property: "
+						        + key);
+					}
+					try {
+						int keyVal = Integer.parseInt(val);
+						keyMap.put(keyVal, func);
+					} catch (NumberFormatException e) {
+						throw new KeyMappingException("Malformed property: "
+						        + key
+						        + "; expected integer but got \"" + "\"", e);
+					}
+				}
 			}
 		} catch (IOException e) {
 			throw new KeyMappingException("Could not read properties file.", e);

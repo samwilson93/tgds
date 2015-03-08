@@ -13,7 +13,7 @@ import com.tgds.pong.game.Player;
 /**
  * @author jdl
  */
-public class PaddleMoveCommand extends Command {
+public class PaddleMoveCommand extends PongCommand {
 
 	/** the direction of the movement */
 	private final Direction direction;

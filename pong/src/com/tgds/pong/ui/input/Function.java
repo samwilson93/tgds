@@ -18,7 +18,10 @@ public enum Function {
 	DOWN_1("player1-down", 0),
 	DOWN_2("player2-down", 1);
 
-	/** the name of the property containing the keycode */
+	/**
+	 * the name of the property containing the keycode - null if there is no
+	 * property for this function
+	 */
 	public String propertyName;
 
 	/**
