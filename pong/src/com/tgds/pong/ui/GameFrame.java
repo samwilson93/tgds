@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 
 import com.tgds.pong.game.Game;
 import com.tgds.pong.ui.input.InputHandler;
-import com.tgds.pong.ui.input.PaddleMovementCommandIssuer;
+import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
 import config.InputConfig;
 
@@ -48,7 +48,7 @@ public class GameFrame {
 		InputConfig config = new InputConfig(new FileInputStream(
 		        "resources/com/tgds/pong/ui/playerOptions.properties"));
 		InputHandler handler = new InputHandler(config,
-		        new PaddleMovementCommandIssuer(game.getPlayers()));
+		        new PaddleMovementCommandDispatcher(game.getPlayers()));
 		frame.addKeyListener(handler);
 	}
 

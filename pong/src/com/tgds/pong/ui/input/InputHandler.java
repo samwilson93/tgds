@@ -26,33 +26,31 @@ public class InputHandler implements KeyListener {
 	private final InputConfig inputConfig;
 
 	/** the command issuer, for responding to inputs */
-	private final ContinuousCommandIssuer commandIssuer;
+	private final StoppableCommandDispatcher commandDispatcher;
 
 	/**
-	 * the keys which are currently down, and the command ticket numbers
-	 * associated with them
+	 * a mapping of keys pressed to commands issued - whenever a key is pressed
+	 * and as a result a command is dispatched, this map is to store a reference
+	 * to the dispatched command, so that when the key is released, the command
+	 * can be stopped.
 	 */
-	private final Map<Integer, Long> keysDown = new HashMap<>();
+	private Map<Integer, StoppableCommand> keyCommands = new HashMap<>();
 
 	/**
 	 * Construct a new InputHandler. Read in a set of properties for the player
 	 * keys, and assign them to actions taken through the game.
 	 * 
 	 * @param config the configuration of inputs
-	 * @param players the players in the game - it is expected that the size of
-	 *            this array is equal to the number of players this input
-	 *            handler is configured for, and that the players are in the
-	 *            correct order in the list (i.e. player 1 is at index 0, player
-	 *            2 at index 1, etc.)
+	 * @param commandDispatcher the command dispatcher
 	 * 
 	 * @throws KeyMappingException if one of the expected keys cannot be mapped
 	 *             for any reason - may include failure to read the properties
 	 *             file, or missing or malformed properties within it.
 	 */
 	public InputHandler(InputConfig config,
-	        ContinuousCommandIssuer commandIssuer) {
+	        StoppableCommandDispatcher commandDispatcher) {
 		inputConfig = config;
-		this.commandIssuer = commandIssuer;
+		this.commandDispatcher = commandDispatcher;
 	}
 
 	/** {@inheritDoc} */
@@ -66,10 +64,10 @@ public class InputHandler implements KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
-		Long ticket = keysDown.get(key);
+		StoppableCommand cmd = keyCommands.get(key);
 		// we only care if the key released has a command attached to it:
-		if (ticket != null) {
-			commandIssuer.stopCommand(ticket);
+		if (cmd != null) {
+			cmd.stop();
 		}
 	}
 
@@ -81,8 +79,8 @@ public class InputHandler implements KeyListener {
 		int key = e.getKeyCode();
 		Function func = inputConfig.getFunction(key);
 		if (func != null) {
-			long ticket = commandIssuer.startCommand(func);
-			keysDown.put(key, ticket);
+			StoppableCommand cmd = commandDispatcher.dispatchCommand(func);
+			keyCommands.put(key, cmd);
 		}
 	}
 }

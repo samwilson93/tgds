@@ -16,5 +16,4 @@ public interface Command {
 	 * Execute this command
 	 */
 	public abstract void execute();
-
 }

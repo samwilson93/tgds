@@ -36,10 +36,4 @@ public abstract class PongCommand implements Command {
 	public Player getPlayer() {
 		return player;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-    public abstract void execute();
 }
