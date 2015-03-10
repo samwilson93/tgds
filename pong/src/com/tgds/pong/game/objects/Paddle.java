@@ -5,8 +5,9 @@
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game;
+package com.tgds.pong.game.objects;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -30,7 +31,7 @@ public class Paddle extends MobileGameFieldObject {
 	 * @param loc
 	 */
 	public Paddle(Point loc) {
-		super(loc, Paddle.getPaddleShape());
+		super(loc, Paddle.getPaddleShape(), true);
 	}
 
 	/**
@@ -68,6 +69,14 @@ public class Paddle extends MobileGameFieldObject {
 		int topLeftY = 0 - HEIGHT / 2;
 		Shape shape = new Rectangle(topLeftX, topLeftY, WIDTH, HEIGHT);
 		return shape;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getColour() {
+		return Color.WHITE;
 	}
 
 }

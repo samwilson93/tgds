@@ -1,6 +1,10 @@
-package com.tgds.pong.game;
+package com.tgds.pong.game.controllers;
 
 import java.awt.Point;
+
+import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Vector;
+import com.tgds.pong.game.objects.Ball;
 
 public class BallController {
 

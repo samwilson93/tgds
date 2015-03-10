@@ -1,5 +1,6 @@
-package com.tgds.pong.game;
+package com.tgds.pong.game.objects;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
@@ -22,7 +23,7 @@ public class Ball extends MobileGameFieldObject {
 	 * @param loc
 	 */
 	public Ball(Point loc) {
-		super(loc, Ball.getBallShape());
+		super(loc, Ball.getBallShape(), true);
 	}
 
 	/**
@@ -42,5 +43,13 @@ public class Ball extends MobileGameFieldObject {
 		int topLeftY = 0 - HEIGHT / 2;
 		Shape shape = new Rectangle(topLeftX, topLeftY, WIDTH, HEIGHT);
 		return shape;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Color getColour() {
+		return Color.RED;
 	}
 }

@@ -16,14 +16,12 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.image.BufferedImage;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JPanel;
 
-import com.tgds.pong.game.Ball;
 import com.tgds.pong.game.Game;
-import com.tgds.pong.game.GameFieldObject;
-import com.tgds.pong.game.Paddle;
+import com.tgds.pong.game.objects.GameFieldObject;
 
 /**
  * The panel which shows the game.
@@ -37,18 +35,6 @@ public class GamePanel extends JPanel {
 
 	/** background colour */
 	private static final Color BACKGROUND_COLOUR = Color.BLACK;
-
-	/** ball colour */
-	private static final Color BALL_COLOUR = Color.RED;
-
-	/** paddle colour */
-	private static final Color PADDLE_COLOUR = Color.WHITE;
-
-	/** net colour */
-	private static final Color NET_COLOUR = Color.GRAY;
-
-	/** the thickness of the net, in pixels */
-	private static final int NET_THICKNESS = 2;
 
 	/** target FPS */
 	private static final int TARGET_FPS = 60;
@@ -100,9 +86,7 @@ public class GamePanel extends JPanel {
 		        BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = (Graphics2D) img.getGraphics();
 		paintBackground(g2);
-		paintNet(g2);
-		paintPaddles(g2);
-		paintBall(g2);
+		paintFieldObjects(g2);
 		g.drawImage(img, 0, 0, null);
 	}
 
@@ -117,19 +101,16 @@ public class GamePanel extends JPanel {
 	}
 
 	/**
-	 * Paint the net in the middle of the court
+	 * Paint all the game field's objects
 	 * 
 	 * @param g the graphics instance to paint on
 	 */
-	private void paintNet(Graphics2D g) {
-		g.setColor(NET_COLOUR);
-
-		int x = getWidth() / 2 - NET_THICKNESS / 2;
-		int width = NET_THICKNESS;
-		int y = 0;
-		int height = getHeight();
-
-		g.fillRect(x, y, width, height);
+	private void paintFieldObjects(Graphics2D g) {
+		g.setColor(Color.WHITE);
+		Collection<GameFieldObject> field = game.getField().getEntities();
+		for (GameFieldObject obj : field) {
+			paintFieldObject(g, obj);
+		}
 	}
 
 	/**
@@ -138,7 +119,9 @@ public class GamePanel extends JPanel {
 	 * @param g the graphics instance to paint on
 	 * @param obj the game object to paint
 	 */
-	private void paintGameObject(Graphics2D g, GameFieldObject obj) {
+	private void paintFieldObject(Graphics2D g, GameFieldObject obj) {
+		Color colour = obj.getColour();
+		g.setColor(colour);
 		Shape s = obj.getShape();
 		Point loc = obj.getLoc();
 		AffineTransform transform = new AffineTransform();
@@ -153,29 +136,5 @@ public class GamePanel extends JPanel {
 			throw new AssertionError(e);
 		}
 		g.transform(transform);
-	}
-
-	/**
-	 * Paint the paddles
-	 * 
-	 * @param g the graphics instance to paint on
-	 */
-	private void paintPaddles(Graphics2D g) {
-		g.setColor(PADDLE_COLOUR);
-		List<Paddle> paddles = game.getPaddles();
-		for (Paddle paddle : paddles) {
-			paintGameObject(g, paddle);
-		}
-	}
-
-	/**
-	 * Paint the ball
-	 * 
-	 * @param g the graphics instance to paint on
-	 */
-	private void paintBall(Graphics2D g) {
-		g.setColor(BALL_COLOUR);
-		Ball ball = game.getBallLocation();
-		paintGameObject(g, ball);
 	}
 }

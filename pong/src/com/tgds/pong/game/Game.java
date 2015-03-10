@@ -7,11 +7,16 @@
  */
 package com.tgds.pong.game;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.tgds.pong.commands.PlayerInputReceiver;
-import com.tgds.pong.game.PaddleController.Side;
+import com.tgds.pong.game.controllers.BallController;
+import com.tgds.pong.game.controllers.PaddleController;
+import com.tgds.pong.game.controllers.PaddleController.Side;
+import com.tgds.pong.game.objects.GameTimedObject;
+import com.tgds.pong.game.objects.Net;
 
 /**
  * The game.
@@ -19,10 +24,9 @@ import com.tgds.pong.game.PaddleController.Side;
  * @author jdl
  */
 public class Game {
-	/** the width of the game, in pixels */
-	private static final int WIDTH = 600;
-	/** the height of the game, in pixels */
-	private static final int HEIGHT = 400;
+
+	/** The field in which the game takes place. */
+	private GameField field;
 
 	/** the paddle controllers */
 	private final List<PaddleController> paddleControllers = new ArrayList<>();
@@ -43,6 +47,8 @@ public class Game {
 	 * Construct a new game.
 	 */
 	public Game() {
+		field = new GameField();
+
 		PaddleController p1control = new PaddleController(Side.LEFT, this);
 		Player p1 = new Player(p1control);
 		PaddleController p2control = new PaddleController(Side.RIGHT, this);
@@ -50,14 +56,21 @@ public class Game {
 
 		ballController = new BallController(this);
 
+		field.addEntity(ballController.getBall());
+
 		players.add(p1);
 		players.add(p2);
 		paddleControllers.add(p1control);
 		paddleControllers.add(p2control);
 
+		field.addEntity(p1control.getPaddle());
+		field.addEntity(p2control.getPaddle());
+
 		updateList.add(p1control.getPaddle());
 		updateList.add(p2control.getPaddle());
 		updateList.add(ballController.getBall());
+
+		field.addEntity(createNet());
 
 		ballController.setStartVelocity();
 
@@ -124,24 +137,24 @@ public class Game {
 		return running;
 	}
 
-	/**
-	 * @return the current location of the ball
-	 */
-	public Ball getBallLocation() {
-		// TODO: implement this
-		return ballController.getBall();
-	}
-
-	/**
-	 * @return the current locations of the paddles
-	 */
-	public List<Paddle> getPaddles() {
-		List<Paddle> result = new ArrayList<>();
-		for (PaddleController controller : paddleControllers) {
-			result.add(controller.getPaddle());
-		}
-		return result;
-	}
+	// /**
+	// * @return the current location of the ball
+	// */
+	// public Ball getBallLocation() {
+	// // TODO: implement this
+	// return ballController.getBall();
+	// }
+	//
+	// /**
+	// * @return the current locations of the paddles
+	// */
+	// public List<Paddle> getPaddles() {
+	// List<Paddle> result = new ArrayList<>();
+	// for (PaddleController controller : paddleControllers) {
+	// result.add(controller.getPaddle());
+	// }
+	// return result;
+	// }
 
 	/**
 	 * @return the player input receivers
@@ -161,14 +174,14 @@ public class Game {
 	 * @return the width of this game
 	 */
 	public int getWidth() {
-		return WIDTH;
+		return field.getWidth();
 	}
 
 	/**
 	 * @return the height of this game
 	 */
 	public int getHeight() {
-		return HEIGHT;
+		return field.getHeight();
 	}
 
 	/**
@@ -183,5 +196,24 @@ public class Game {
 	 */
 	public int getVerticalCentre() {
 		return getHeight() / 2;
+	}
+
+	/**
+	 * @return the game field
+	 */
+	public GameField getField() {
+		return field;
+	}
+
+	/**
+	 * Create the net
+	 * 
+	 * @return the net
+	 */
+	private Net createNet() {
+		int x = getHorizontalCentre();
+		int y = getVerticalCentre();
+		int height = field.getHeight();
+		return new Net(new Point(x, y), height);
 	}
 }
