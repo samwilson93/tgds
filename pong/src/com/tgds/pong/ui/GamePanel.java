@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import com.tgds.pong.game.Game;
 import com.tgds.pong.game.objects.GameFieldObject;
+import com.tgds.pong.game.objects.GameTimedObject;
 
 /**
  * The panel which shows the game.
@@ -36,14 +37,8 @@ public class GamePanel extends JPanel {
 	/** background colour */
 	private static final Color BACKGROUND_COLOUR = Color.BLACK;
 
-	/** target FPS */
-	private static final int TARGET_FPS = 60;
-
 	/** the game which we are displaying */
 	private final Game game;
-
-	/** whether the game is running */
-	private boolean running = true;
 
 	/**
 	 * Constructor
@@ -54,27 +49,12 @@ public class GamePanel extends JPanel {
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
 
-		launchUpdateThread();
-	}
-
-	/**
-	 * Launch the thread responsible for updating the graphics of this panel.
-	 */
-	private void launchUpdateThread() {
-		Thread t = new Thread("UI Painting") {
+		game.addTimedObject(new GameTimedObject() {
 			@Override
-			public void run() {
-				while (running) {
-					try {
-						Thread.sleep(1000 / TARGET_FPS);
-					} catch (InterruptedException e) {
-						// do nothing
-					}
-					repaint();
-				}
+			public void update() {
+				repaint();
 			}
-		};
-		t.start();
+		});
 	}
 
 	/**
