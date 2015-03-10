@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 
 import com.tgds.pong.game.Ball;
 import com.tgds.pong.game.Game;
+import com.tgds.pong.game.GameFieldObject;
 import com.tgds.pong.game.Paddle;
 
 /**
@@ -132,41 +133,14 @@ public class GamePanel extends JPanel {
 	}
 
 	/**
-	 * Paint the paddles
+	 * Paint a game object
 	 * 
 	 * @param g the graphics instance to paint on
+	 * @param obj the game object to paint
 	 */
-	private void paintPaddles(Graphics2D g) {
-		g.setColor(PADDLE_COLOUR);
-		List<Paddle> paddles = game.getPaddles();
-		for (Paddle paddle : paddles) {
-			Shape s = paddle.getShape();
-			Point loc = paddle.getLoc();
-			AffineTransform transform = new AffineTransform();
-			transform.translate(loc.x, loc.y);
-			g.transform(transform);
-			g.fill(s);
-			try {
-				transform = transform.createInverse();
-			} catch (NoninvertibleTransformException e) {
-				// this should never happen - only a translate has been applied,
-				// and that is invertible
-				throw new AssertionError(e);
-			}
-			g.transform(transform);
-		}
-	}
-
-	/**
-	 * Paint the ball
-	 * 
-	 * @param g the graphics instance to paint on
-	 */
-	private void paintBall(Graphics2D g) {
-		g.setColor(BALL_COLOUR);
-		Ball ball = game.getBallLocation();
-		Shape s = ball.getShape();
-		Point loc = ball.getLoc();
+	private void paintGameObject(Graphics2D g, GameFieldObject obj) {
+		Shape s = obj.getShape();
+		Point loc = obj.getLoc();
 		AffineTransform transform = new AffineTransform();
 		transform.translate(loc.x, loc.y);
 		g.transform(transform);
@@ -179,5 +153,29 @@ public class GamePanel extends JPanel {
 			throw new AssertionError(e);
 		}
 		g.transform(transform);
+	}
+
+	/**
+	 * Paint the paddles
+	 * 
+	 * @param g the graphics instance to paint on
+	 */
+	private void paintPaddles(Graphics2D g) {
+		g.setColor(PADDLE_COLOUR);
+		List<Paddle> paddles = game.getPaddles();
+		for (Paddle paddle : paddles) {
+			paintGameObject(g, paddle);
+		}
+	}
+
+	/**
+	 * Paint the ball
+	 * 
+	 * @param g the graphics instance to paint on
+	 */
+	private void paintBall(Graphics2D g) {
+		g.setColor(BALL_COLOUR);
+		Ball ball = game.getBallLocation();
+		paintGameObject(g, ball);
 	}
 }
