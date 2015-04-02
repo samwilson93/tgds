@@ -12,11 +12,10 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import com.tgds.pong.config.InputConfig;
 import com.tgds.pong.game.Game;
 import com.tgds.pong.ui.input.InputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
-
-import config.InputConfig;
 
 /**
  * Main frame and method for the game of Pong.
