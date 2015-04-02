@@ -6,8 +6,8 @@ import com.tgds.pong.game.objects.Ball;
 
 public class BallController {
 
-	/** the speed of the paddle in pixels per second */
-	private static final double SPEED = 50;
+	/** the speed of the ball in pixels per second */
+	private static final double SPEED = 5;
 
 	/** the initial angle that the ball begins moving towards */
 	private static final double START_ANGLE = 45;
