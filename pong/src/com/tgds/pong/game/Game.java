@@ -7,7 +7,6 @@
  */
 package com.tgds.pong.game;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -214,6 +213,6 @@ public class Game {
 		int x = getHorizontalCentre();
 		int y = getVerticalCentre();
 		int height = field.getHeight();
-		return new Net(new Point(x, y), height);
+		return new Net(Vector.cartesian(x, y), height);
 	}
 }

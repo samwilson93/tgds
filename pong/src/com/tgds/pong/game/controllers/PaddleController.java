@@ -7,7 +7,6 @@
  */
 package com.tgds.pong.game.controllers;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,7 +68,7 @@ public class PaddleController implements PlayerInputReceiver {
 		}
 		y = game.getVerticalCentre();
 
-		paddle = new Paddle(new Point(x, y));
+		paddle = new Paddle(Vector.cartesian(x, y));
 		paddle.setMaxSpeed(MAX_SPEED);
 		paddle.setFriction(true);
 		paddle.setCoefficientOfFriction(FRICTION_COEFFICIENT);
@@ -94,7 +93,7 @@ public class PaddleController implements PlayerInputReceiver {
 	/**
 	 * @return the location of this controllers paddle.
 	 */
-	public Point getPaddleLoc() {
+	public Vector getPaddleLoc() {
 		return paddle.getLoc();
 	}
 

@@ -7,7 +7,6 @@
  */
 package com.tgds.pong.game.objects;
 
-import java.awt.Point;
 import java.awt.Shape;
 
 import com.tgds.pong.game.Vector;
@@ -61,7 +60,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * @param coefficientOfFriction the initial coefficient of friction
 	 * @param friction whether friction should be applied to the object
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape, boolean solid,
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
 	        Vector velocity, Vector acceleration, double coefficientOfFriction,
 	        boolean friction)
 	{
@@ -81,7 +80,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 *            objects bounce off it)
 	 * @param velocity the initial velocity of the object
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape, boolean solid,
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
 	        Vector velocity) {
 		this(loc, shape, solid, velocity, Vector.cartesian(0.0, 0.0), 0.0,
 		        false);
@@ -96,7 +95,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * @param solid whether the object is solid (i.e. whether other solid
 	 *            objects bounce off it)
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape, boolean solid) {
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid) {
 		this(loc, shape, solid, Vector.cartesian(0, 0));
 	}
 
@@ -199,7 +198,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	@Override
 	public void update() {
 		accelerate();
-		translate(velocity.asPoint());
+		translate(velocity);
 	}
 
 	/**

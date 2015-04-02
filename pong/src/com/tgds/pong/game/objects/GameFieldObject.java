@@ -8,8 +8,9 @@
 package com.tgds.pong.game.objects;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.Shape;
+
+import com.tgds.pong.game.Vector;
 
 /**
  * An item that may appear in the game field. Consists primarily of a shape and
@@ -22,7 +23,7 @@ import java.awt.Shape;
 public abstract class GameFieldObject {
 
 	/** the location of this object, within its field. */
-	private Point loc;
+	private Vector loc;
 
 	/** the shape of this object, centred on its loc */
 	private Shape shape;
@@ -40,7 +41,7 @@ public abstract class GameFieldObject {
 	 * @param shope the shape of the object
 	 * @param solid whether the object is solid
 	 */
-	protected GameFieldObject(Point loc, Shape shape, boolean solid) {
+	protected GameFieldObject(Vector loc, Shape shape, boolean solid) {
 		this.loc = loc;
 		this.shape = shape;
 		this.solid = solid;
@@ -60,8 +61,8 @@ public abstract class GameFieldObject {
 	 * @param vector the new position of the object, relative to its current
 	 *            position.
 	 */
-	protected void translate(Point vector) {
-		loc.translate(vector.x, vector.y);
+	protected void translate(Vector vector) {
+		loc = loc.add(vector);
 	}
 
 	/**
@@ -69,14 +70,14 @@ public abstract class GameFieldObject {
 	 * 
 	 * @param newLoc the new location
 	 */
-	protected void setLoc(Point newLoc) {
+	protected void setLoc(Vector newLoc) {
 		loc = newLoc;
 	}
 
 	/**
 	 * @return the location of this object, within its field.
 	 */
-	public Point getLoc() {
+	public Vector getLoc() {
 		return loc;
 	}
 

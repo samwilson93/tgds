@@ -11,7 +11,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
@@ -21,6 +20,7 @@ import java.util.Collection;
 import javax.swing.JPanel;
 
 import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
 
@@ -103,9 +103,9 @@ public class GamePanel extends JPanel {
 		Color colour = obj.getColour();
 		g.setColor(colour);
 		Shape s = obj.getShape();
-		Point loc = obj.getLoc();
+		Vector loc = obj.getLoc();
 		AffineTransform transform = new AffineTransform();
-		transform.translate(loc.x, loc.y);
+		transform.translate(loc.getX(), loc.getY());
 		g.transform(transform);
 		g.fill(s);
 		try {

@@ -8,9 +8,10 @@
 package com.tgds.pong.game.objects;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+
+import com.tgds.pong.game.Vector;
 
 /**
  * The court's net - a decorative object showing the centre of the court
@@ -28,7 +29,7 @@ public class Net extends GameFieldObject {
 	 * @param loc the location of the net
 	 * @param height the height of the net, in pixels
 	 */
-	public Net(Point loc, int height) {
+	public Net(Vector loc, int height) {
 		super(loc, getNetShape(height), false);
 	}
 

@@ -1,9 +1,10 @@
 package com.tgds.pong.game.objects;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+
+import com.tgds.pong.game.Vector;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
@@ -22,7 +23,7 @@ public class Ball extends MobileGameFieldObject {
 	 * 
 	 * @param loc
 	 */
-	public Ball(Point loc) {
+	public Ball(Vector loc) {
 		super(loc, Ball.getBallShape(), true);
 	}
 

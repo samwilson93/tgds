@@ -8,9 +8,10 @@
 package com.tgds.pong.game.objects;
 
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Shape;
+
+import com.tgds.pong.game.Vector;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -30,7 +31,7 @@ public class Paddle extends MobileGameFieldObject {
 	 * 
 	 * @param loc
 	 */
-	public Paddle(Point loc) {
+	public Paddle(Vector loc) {
 		super(loc, Paddle.getPaddleShape(), true);
 	}
 
