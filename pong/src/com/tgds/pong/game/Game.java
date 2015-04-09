@@ -90,6 +90,9 @@ public class Game {
 						for (GameTimedObject obj : updateList) {
 							obj.update();
 						}
+						if (players.get(0).getScore() == 10 || players.get(1).getScore() == 10){
+							setRunning(false);
+						}
 						try {
 							Thread.sleep(stepTime);
 						} catch (InterruptedException e) {
@@ -102,6 +105,14 @@ public class Game {
 		t.start();
 	}
 
+	/**
+	 * Called when a player scores
+	 * @param scoringPlayer the player who scored the point
+	 */
+	public void playerScored(Player scoringPlayer){
+		scoringPlayer.incrementScore();
+	}
+	
 	/**
 	 * Add an object to the game to be updated in the game loop.
 	 * 
