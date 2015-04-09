@@ -56,10 +56,10 @@ public class PaddleController implements PlayerInputReceiver {
 	public PaddleController(Side side, Game game) {
 		int x, y;
 		switch (side) {
-			case LEFT:
+			case WEST:
 				x = X_DISTANCE;
 				break;
-			case RIGHT:
+			case EAST:
 				x = game.getWidth() - X_DISTANCE;
 				break;
 			default:
@@ -83,6 +83,25 @@ public class PaddleController implements PlayerInputReceiver {
 	}
 
 	/**
+	 * Respond to a detected collision with another object.
+	 * 
+	 * @param other the other object
+	 */
+	private void reactCollision(GameFieldObject other) {
+		Class<?> otherClass = other.getClass();
+		if (otherClass == Wall.class) {
+			Vector noVelocity = Vector.cartesian(0,0);
+			paddle.setVelocity(noVelocity);
+		}
+		if (otherClass == Ball.class) {
+			// Do nothing (As the ball will move)
+			// TODO: Remove this if statement, is just for explanations sake
+		}
+		// And hopefully it won't collide with another paddle otherwise we might
+		// have some problems
+	}
+	
+	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -102,12 +121,5 @@ public class PaddleController implements PlayerInputReceiver {
 	 */
 	public Paddle getPaddle() {
 		return paddle;
-	}
-
-	/**
-	 * Side - the side of the playing field the paddle is on.
-	 */
-	public static enum Side {
-		LEFT, RIGHT;
 	}
 }
