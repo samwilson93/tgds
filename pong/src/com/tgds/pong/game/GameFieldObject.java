@@ -35,12 +35,12 @@ public abstract class GameFieldObject {
 	}
 
 	/**
-	 * Detect a collision between this object and another
+	 * Check a collision between this object and another
 	 * 
 	 * @param other another gameFieldObject to check for collisions with
 	 * @return true if the two objects intersect
 	 */
-	public boolean detectCollision(GameFieldObject other){
+	public boolean checkCollision(GameFieldObject other){
 		Shape thisShape = this.getShape();
 		Shape otherShape = other.getShape();
 		
@@ -55,7 +55,14 @@ public abstract class GameFieldObject {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Function to detect collisions using the checkCollision function and then react appropriately 
+	 * 
+	 * @param other the object it may be colliding with
+	 * @return returns true if function has acted correctly
+	 */
+	public abstract boolean detectCollision(GameFieldObject other);
 	/**
 	 * Translate the location of this object within its field.
 	 * 

@@ -41,8 +41,15 @@ public class Paddle extends MobileGameFieldObject {
 	 */
 	@Override
 	public boolean detectCollision(GameFieldObject other) {
-		// TODO implement as part of issue #4
-		return false;
+		if(this.checkCollision(other))
+		{
+			//TODO: REACT
+			return true;
+		} else if (!this.checkCollision(other)) {
+			return true;
+		}
+		
+		return false;		
 	}
 
 	/**
