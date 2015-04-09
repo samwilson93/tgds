@@ -53,7 +53,9 @@ public abstract class GameFieldObject {
 	 * @param other another gameFieldObject to check for collisions with
 	 * @return true if the two objects intersect
 	 */
-	public abstract boolean detectCollision(GameFieldObject other);
+	public boolean detectCollision(GameFieldObject other) {
+		return false;
+	}
 
 	/**
 	 * Translate the location of this object within its field.

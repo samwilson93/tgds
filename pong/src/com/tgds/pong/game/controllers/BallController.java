@@ -2,7 +2,10 @@ package com.tgds.pong.game.controllers;
 
 import com.tgds.pong.game.Game;
 import com.tgds.pong.game.Vector;
+import com.tgds.pong.game.Wall;
 import com.tgds.pong.game.objects.Ball;
+import com.tgds.pong.game.objects.GameFieldObject;
+import com.tgds.pong.game.objects.Paddle;
 
 public class BallController {
 

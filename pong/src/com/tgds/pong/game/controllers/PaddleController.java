@@ -12,7 +12,11 @@ import java.util.Map;
 
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Side;
 import com.tgds.pong.game.Vector;
+import com.tgds.pong.game.Wall;
+import com.tgds.pong.game.objects.Ball;
+import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.Paddle;
 
 /**
@@ -90,7 +94,7 @@ public class PaddleController implements PlayerInputReceiver {
 	private void reactCollision(GameFieldObject other) {
 		Class<?> otherClass = other.getClass();
 		if (otherClass == Wall.class) {
-			Vector noVelocity = Vector.cartesian(0,0);
+			Vector noVelocity = Vector.cartesian(0, 0);
 			paddle.setVelocity(noVelocity);
 		}
 		if (otherClass == Ball.class) {
@@ -100,7 +104,7 @@ public class PaddleController implements PlayerInputReceiver {
 		// And hopefully it won't collide with another paddle otherwise we might
 		// have some problems
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
