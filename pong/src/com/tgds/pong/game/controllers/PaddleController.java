@@ -5,13 +5,15 @@
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game;
+package com.tgds.pong.game.controllers;
 
-import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.tgds.pong.commands.PlayerInputReceiver;
+import com.tgds.pong.game.Game;
+import com.tgds.pong.game.Vector;
+import com.tgds.pong.game.objects.Paddle;
 
 /**
  * Controller class for a paddle.
@@ -66,7 +68,7 @@ public class PaddleController implements PlayerInputReceiver {
 		}
 		y = game.getVerticalCentre();
 
-		paddle = new Paddle(new Point(x, y));
+		paddle = new Paddle(Vector.cartesian(x, y));
 		paddle.setMaxSpeed(MAX_SPEED);
 		paddle.setFriction(true);
 		paddle.setCoefficientOfFriction(FRICTION_COEFFICIENT);
@@ -91,7 +93,7 @@ public class PaddleController implements PlayerInputReceiver {
 	/**
 	 * @return the location of this controllers paddle.
 	 */
-	public Point getPaddleLoc() {
+	public Vector getPaddleLoc() {
 		return paddle.getLoc();
 	}
 

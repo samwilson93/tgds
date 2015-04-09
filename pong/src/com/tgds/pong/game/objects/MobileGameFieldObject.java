@@ -5,10 +5,11 @@
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game;
+package com.tgds.pong.game.objects;
 
-import java.awt.Point;
 import java.awt.Shape;
+
+import com.tgds.pong.game.Vector;
 
 /**
  * Game field objects which can accelerate and decelerate, and have velocities.
@@ -52,15 +53,18 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * 
 	 * @param loc the starting location of the object
 	 * @param shape the shape of the object
-	 * @param velocity the inital velocity of the object
+	 * @param solid whether the object is solid (i.e. whether other solid
+	 *            objects bounce off it)
+	 * @param velocity the initial velocity of the object
 	 * @param acceleration the initial acceleration of the object
 	 * @param coefficientOfFriction the initial coefficient of friction
 	 * @param friction whether friction should be applied to the object
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape, Vector velocity,
-	        Vector acceleration, double coefficientOfFriction, boolean friction)
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
+	        Vector velocity, Vector acceleration, double coefficientOfFriction,
+	        boolean friction)
 	{
-		super(loc, shape);
+		super(loc, shape, solid);
 		this.velocity = velocity;
 		this.setAcceleration(acceleration);
 		this.coefficientOfFriction = coefficientOfFriction;
@@ -72,10 +76,14 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * 
 	 * @param loc the starting location of the object
 	 * @param shape the shape of the object
+	 * @param solid whether the object is solid (i.e. whether other solid
+	 *            objects bounce off it)
 	 * @param velocity the initial velocity of the object
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape, Vector velocity) {
-		this(loc, shape, velocity, Vector.cartesian(0.0, 0.0), 0.0, false);
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
+	        Vector velocity) {
+		this(loc, shape, solid, velocity, Vector.cartesian(0.0, 0.0), 0.0,
+		        false);
 	}
 
 	/**
@@ -84,9 +92,11 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * 
 	 * @param loc the starting location of the object.
 	 * @param shape the shape of the object
+	 * @param solid whether the object is solid (i.e. whether other solid
+	 *            objects bounce off it)
 	 */
-	protected MobileGameFieldObject(Point loc, Shape shape) {
-		this(loc, shape, Vector.cartesian(0, 0));
+	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid) {
+		this(loc, shape, solid, Vector.cartesian(0, 0));
 	}
 
 	/**
@@ -188,7 +198,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	@Override
 	public void update() {
 		accelerate();
-		translate(velocity.asPoint());
+		translate(velocity);
 	}
 
 	/**

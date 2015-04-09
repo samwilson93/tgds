@@ -11,18 +11,18 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.image.BufferedImage;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JPanel;
 
-import com.tgds.pong.game.Ball;
 import com.tgds.pong.game.Game;
-import com.tgds.pong.game.Paddle;
+import com.tgds.pong.game.Vector;
+import com.tgds.pong.game.objects.GameFieldObject;
+import com.tgds.pong.game.objects.GameTimedObject;
 
 /**
  * The panel which shows the game.
@@ -37,26 +37,8 @@ public class GamePanel extends JPanel {
 	/** background colour */
 	private static final Color BACKGROUND_COLOUR = Color.BLACK;
 
-	/** ball colour */
-	private static final Color BALL_COLOUR = Color.RED;
-
-	/** paddle colour */
-	private static final Color PADDLE_COLOUR = Color.WHITE;
-
-	/** net colour */
-	private static final Color NET_COLOUR = Color.GRAY;
-
-	/** the thickness of the net, in pixels */
-	private static final int NET_THICKNESS = 2;
-
-	/** target FPS */
-	private static final int TARGET_FPS = 60;
-
 	/** the game which we are displaying */
 	private final Game game;
-
-	/** whether the game is running */
-	private boolean running = true;
 
 	/**
 	 * Constructor
@@ -67,27 +49,12 @@ public class GamePanel extends JPanel {
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
 
-		launchUpdateThread();
-	}
-
-	/**
-	 * Launch the thread responsible for updating the graphics of this panel.
-	 */
-	private void launchUpdateThread() {
-		Thread t = new Thread("UI Painting") {
+		game.addTimedObject(new GameTimedObject() {
 			@Override
-			public void run() {
-				while (running) {
-					try {
-						Thread.sleep(1000 / TARGET_FPS);
-					} catch (InterruptedException e) {
-						// do nothing
-					}
-					repaint();
-				}
+			public void update() {
+				repaint();
 			}
-		};
-		t.start();
+		});
 	}
 
 	/**
@@ -99,9 +66,7 @@ public class GamePanel extends JPanel {
 		        BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2 = (Graphics2D) img.getGraphics();
 		paintBackground(g2);
-		paintNet(g2);
-		paintPaddles(g2);
-		paintBall(g2);
+		paintFieldObjects(g2);
 		g.drawImage(img, 0, 0, null);
 	}
 
@@ -116,59 +81,31 @@ public class GamePanel extends JPanel {
 	}
 
 	/**
-	 * Paint the net in the middle of the court
+	 * Paint all the game field's objects
 	 * 
 	 * @param g the graphics instance to paint on
 	 */
-	private void paintNet(Graphics2D g) {
-		g.setColor(NET_COLOUR);
-
-		int x = getWidth() / 2 - NET_THICKNESS / 2;
-		int width = NET_THICKNESS;
-		int y = 0;
-		int height = getHeight();
-
-		g.fillRect(x, y, width, height);
-	}
-
-	/**
-	 * Paint the paddles
-	 * 
-	 * @param g the graphics instance to paint on
-	 */
-	private void paintPaddles(Graphics2D g) {
-		g.setColor(PADDLE_COLOUR);
-		List<Paddle> paddles = game.getPaddles();
-		for (Paddle paddle : paddles) {
-			Shape s = paddle.getShape();
-			Point loc = paddle.getLoc();
-			AffineTransform transform = new AffineTransform();
-			transform.translate(loc.x, loc.y);
-			g.transform(transform);
-			g.fill(s);
-			try {
-				transform = transform.createInverse();
-			} catch (NoninvertibleTransformException e) {
-				// this should never happen - only a translate has been applied,
-				// and that is invertible
-				throw new AssertionError(e);
-			}
-			g.transform(transform);
+	private void paintFieldObjects(Graphics2D g) {
+		g.setColor(Color.WHITE);
+		Collection<GameFieldObject> field = game.getField().getEntities();
+		for (GameFieldObject obj : field) {
+			paintFieldObject(g, obj);
 		}
 	}
 
 	/**
-	 * Paint the ball
+	 * Paint a game object
 	 * 
 	 * @param g the graphics instance to paint on
+	 * @param obj the game object to paint
 	 */
-	private void paintBall(Graphics2D g) {
-		g.setColor(BALL_COLOUR);
-		Ball ball = game.getBallLocation();
-		Shape s = ball.getShape();
-		Point loc = ball.getLoc();
+	private void paintFieldObject(Graphics2D g, GameFieldObject obj) {
+		Color colour = obj.getColour();
+		g.setColor(colour);
+		Shape s = obj.getShape();
+		Vector loc = obj.getLoc();
 		AffineTransform transform = new AffineTransform();
-		transform.translate(loc.x, loc.y);
+		transform.translate(loc.getX(), loc.getY());
 		g.transform(transform);
 		g.fill(s);
 		try {

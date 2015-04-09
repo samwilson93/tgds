@@ -5,7 +5,7 @@
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package config;
+package com.tgds.pong.config;
 
 import java.io.IOException;
 import java.io.InputStream;

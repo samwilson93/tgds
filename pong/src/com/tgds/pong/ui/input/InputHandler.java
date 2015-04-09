@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import config.InputConfig;
+import com.tgds.pong.config.InputConfig;
 
 /**
  * Handles input from the human players, and converts it into commands which are
