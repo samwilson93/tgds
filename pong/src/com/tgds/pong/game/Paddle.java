@@ -34,33 +34,6 @@ public class Paddle extends MobileGameFieldObject {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean detectCollision(GameFieldObject other) {
-		// TODO implement as part of issue #4
-		return false;
-	}
-
-	/**
-	 * Respond to a detected collision with another object.
-	 * 
-	 * @param other the other object
-	 */
-	private void reactCollision(GameFieldObject other) {
-		Class<?> otherClass = other.getClass();
-		if (otherClass.getName() == "Wall") {
-			// Stop moving that direction (Or we could have it bounce a bit?)
-		}
-		if (otherClass.getName() == "Ball") {
-			// Do nothing (As the ball will move)
-			// TODO: Remove this if statement, is just for explanations sake
-		}
-		// And hopefully it won't collide with another paddle otherwise we might
-		// have some problems
-	}
-
-	/**
 	 * Get a new shape to represent this paddle's shape
 	 */
 	private static Shape getPaddleShape() {

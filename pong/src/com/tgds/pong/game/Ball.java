@@ -24,16 +24,7 @@ public class Ball extends MobileGameFieldObject {
 	public Ball(Point loc) {
 		super(loc, Ball.getBallShape());
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean detectCollision(GameFieldObject other) {
-		// TODO implement as part of issue #4
-		return false;
-	}
-
+	
 	/**
 	 * Get a new shape to represent this paddle's shape
 	 */

@@ -190,13 +190,4 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 		accelerate();
 		translate(velocity.asPoint());
 	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean detectCollision(GameFieldObject other) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

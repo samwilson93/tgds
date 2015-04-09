@@ -43,9 +43,9 @@ public class Game {
 	 * Construct a new game.
 	 */
 	public Game() {
-		PaddleController p1control = new PaddleController(Side.LEFT, this);
+		PaddleController p1control = new PaddleController(Side.WEST, this);
 		Player p1 = new Player(p1control);
-		PaddleController p2control = new PaddleController(Side.RIGHT, this);
+		PaddleController p2control = new PaddleController(Side.EAST, this);
 		Player p2 = new Player(p2control);
 
 		ballController = new BallController(this);
@@ -60,6 +60,9 @@ public class Game {
 		updateList.add(ballController.getBall());
 
 		ballController.setStartVelocity();
+		
+		field.addEntity(createWallsAndGoals(Side.NORTH));
+		field.addEntity(createWallsAndGoals(Side.SOUTH));
 
 		setRunning(true);
 		startGameLoop();
@@ -183,5 +186,27 @@ public class Game {
 	 */
 	public int getVerticalCentre() {
 		return getHeight() / 2;
+	}
+	
+	/**
+	* Create the net
+	*
+	* @return the net
+	*/
+	private Wall createWallsAndGoals(Side side) {
+		if (side == Side.NORTH) {
+			int y = 0;
+		} else if (side == Side.SOUTH) {
+			int y = field.getHeight();
+		} else if (side == Side.EAST) {
+			//GOAL
+		} else if (side == Side.WEST) {
+			//GOOOOOOOOOAL
+		}
+		
+		int x = getHorizontalCentre();
+		int width = field.getWidth();
+		return new Wall(Vector.cartesian(x, y), width);
+		
 	}
 }
