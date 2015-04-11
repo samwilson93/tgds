@@ -1,8 +1,15 @@
 *.class
 bin/*
+<<<<<<< HEAD
 */.idea/*
 *.metadata/*
 .recommenders/*
 *.project
 *.classpath
 /bin/
+=======
+
+.metadata/*
+.recommenders/*
+*/.idea/*
+>>>>>>> pr/22

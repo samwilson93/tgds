@@ -22,4 +22,13 @@ public class Wall extends GameFieldObject {
 		// TODO change this
 		return Color.ORANGE;
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean detectCollision(GameFieldObject other) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

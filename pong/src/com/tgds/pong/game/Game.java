@@ -13,6 +13,7 @@ import java.util.List;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
+import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
 import com.tgds.pong.game.objects.Net;
 
@@ -92,6 +93,11 @@ public class Game {
 						for (GameTimedObject obj : updateList) {
 							obj.update();
 						}
+						for (GameFieldObject obj : field.getEntities()) {
+							for (GameFieldObject other : field.getEntities()) {
+								obj.detectCollision(other);
+							}
+						}
 						if (players.get(0).getScore() == 10
 						        || players.get(1).getScore() == 10) {
 							setRunning(false);
@@ -150,25 +156,6 @@ public class Game {
 	public boolean isRunning() {
 		return running;
 	}
-
-	// /**
-	// * @return the current location of the ball
-	// */
-	// public Ball getBallLocation() {
-	// // TODO: implement this
-	// return ballController.getBall();
-	// }
-	//
-	// /**
-	// * @return the current locations of the paddles
-	// */
-	// public List<Paddle> getPaddles() {
-	// List<Paddle> result = new ArrayList<>();
-	// for (PaddleController controller : paddleControllers) {
-	// result.add(controller.getPaddle());
-	// }
-	// return result;
-	// }
 
 	/**
 	 * @return the player input receivers
@@ -248,7 +235,7 @@ public class Game {
 			// GOOOOOOOOOAL
 		}
 
-		int x = getHorizontalCentre();
+		int x = 0;
 		int width = field.getWidth();
 		return new Wall(Vector.cartesian(x, y), width);
 	}
