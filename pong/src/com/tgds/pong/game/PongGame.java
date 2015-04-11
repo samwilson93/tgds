@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tgds.common.game.Game;
+import com.tgds.common.game.GameField;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
