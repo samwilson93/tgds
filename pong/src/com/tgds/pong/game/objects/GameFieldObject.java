@@ -11,7 +11,7 @@ import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.util.Vector;
 
 /**
  * An item that may appear in the game field. Consists primarily of a shape and

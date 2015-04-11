@@ -3,6 +3,7 @@ package com.tgds.pong.game;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import com.tgds.common.util.Vector;
 import com.tgds.pong.game.objects.GameFieldObject;
 
 public class Wall extends GameFieldObject {

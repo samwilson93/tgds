@@ -9,7 +9,7 @@ package com.tgds.pong.game.objects;
 
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.util.Vector;
 
 /**
  * Game field objects which can accelerate and decelerate, and have velocities.

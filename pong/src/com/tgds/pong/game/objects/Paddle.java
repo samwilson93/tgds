@@ -11,7 +11,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.util.Vector;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player

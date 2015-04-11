@@ -19,8 +19,8 @@ import java.util.Collection;
 
 import javax.swing.JPanel;
 
+import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
 

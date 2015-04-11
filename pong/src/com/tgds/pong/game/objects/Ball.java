@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.util.Vector;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
