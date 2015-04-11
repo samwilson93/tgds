@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 import com.tgds.pong.config.InputConfig;
-import com.tgds.pong.game.Game;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.InputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
@@ -35,7 +35,7 @@ public class GameFrame {
 	 */
 	private GameFrame() throws IOException {
 
-		Game game = new Game();
+		PongGame game = new PongGame();
 		gamePanel = new GamePanel(game);
 
 		frame = new JFrame();

@@ -1,6 +1,6 @@
 package com.tgds.pong.game.controllers;
 
-import com.tgds.pong.game.Game;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.Wall;
 import com.tgds.pong.game.objects.Ball;
@@ -24,7 +24,7 @@ public class BallController {
 	 * @param game the game in which this controller sits
 	 * @param side the side of the playing field on which this controller
 	 */
-	public BallController(Game game) {
+	public BallController(PongGame game) {
 		int x, y;
 
 		x = game.getHorizontalCentre();

@@ -19,7 +19,7 @@ import java.util.Collection;
 
 import javax.swing.JPanel;
 
-import com.tgds.pong.game.Game;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
@@ -38,12 +38,12 @@ public class GamePanel extends JPanel {
 	private static final Color BACKGROUND_COLOUR = Color.BLACK;
 
 	/** the game which we are displaying */
-	private final Game game;
+	private final PongGame game;
 
 	/**
 	 * Constructor
 	 */
-	public GamePanel(Game game) {
+	public GamePanel(PongGame game) {
 		this.game = game;
 
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));

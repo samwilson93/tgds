@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.tgds.pong.commands.PlayerInputReceiver;
-import com.tgds.pong.game.Game;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Side;
 import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.Wall;
@@ -57,7 +57,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 * @param game the game in which this controller sits
 	 * @param side the side of the playing field on which this controller
 	 */
-	public PaddleController(Side side, Game game) {
+	public PaddleController(Side side, PongGame game) {
 		int x, y;
 		switch (side) {
 			case WEST:
