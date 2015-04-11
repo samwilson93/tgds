@@ -7,6 +7,7 @@
  */
 package com.tgds.pong.ui.input;
 
+
 /**
  * The {@code CommandDispatcher} is responsible for creating and executing
  * commands in response to input events.

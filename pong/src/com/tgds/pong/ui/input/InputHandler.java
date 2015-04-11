@@ -12,7 +12,8 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.tgds.pong.config.InputConfig;
+import com.tgds.common.config.InputConfig;
+import com.tgds.common.config.KeyMappingException;
 
 /**
  * Handles input from the human players, and converts it into commands which are
@@ -23,7 +24,7 @@ import com.tgds.pong.config.InputConfig;
 public class InputHandler implements KeyListener {
 
 	/** the input configuration */
-	private final InputConfig inputConfig;
+	private final InputConfig<Function> inputConfig;
 
 	/** the command issuer, for responding to inputs */
 	private final StoppableCommandDispatcher commandDispatcher;
@@ -47,7 +48,7 @@ public class InputHandler implements KeyListener {
 	 *             for any reason - may include failure to read the properties
 	 *             file, or missing or malformed properties within it.
 	 */
-	public InputHandler(InputConfig config,
+	public InputHandler(InputConfig<Function> config,
 	        StoppableCommandDispatcher commandDispatcher) {
 		inputConfig = config;
 		this.commandDispatcher = commandDispatcher;

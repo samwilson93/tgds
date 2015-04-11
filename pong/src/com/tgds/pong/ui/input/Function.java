@@ -7,12 +7,14 @@
  */
 package com.tgds.pong.ui.input;
 
+import com.tgds.common.ui.input.InputFunction;
+
 /**
  * enumeration of expected functions
  * 
  * @author jdl
  */
-public enum Function {
+public enum Function implements InputFunction {
 	UP_1("player1-up", 0),
 	UP_2("player2-up", 1),
 	DOWN_1("player1-down", 0),
@@ -22,7 +24,7 @@ public enum Function {
 	 * the name of the property containing the keycode - null if there is no
 	 * property for this function
 	 */
-	public String propertyName;
+	private String propertyName;
 
 	/**
 	 * the expected index of the player within the list of players this command
@@ -34,5 +36,10 @@ public enum Function {
 	private Function(String property, int playerIndex) {
 		this.propertyName = property;
 		this.playerIndex = playerIndex;
+	}
+
+	/** {@inheritDoc} */
+	public String getPropertyName() {
+		return propertyName;
 	}
 }

@@ -1,6 +1,6 @@
 /**
  * File:     MobileGameFieldEntity.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 

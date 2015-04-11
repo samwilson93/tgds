@@ -9,11 +9,14 @@ package com.tgds.pong.ui;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.swing.JFrame;
 
-import com.tgds.pong.config.InputConfig;
+import com.tgds.common.config.ConfigurationException;
+import com.tgds.common.config.InputConfig;
 import com.tgds.pong.game.PongGame;
+import com.tgds.pong.ui.input.Function;
 import com.tgds.pong.ui.input.InputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
@@ -32,8 +35,10 @@ public class GameFrame {
 
 	/**
 	 * Constructor. Build the frame and show it.
+	 * 
+	 * @throws ConfigurationException
 	 */
-	private GameFrame() throws IOException {
+	private GameFrame() throws IOException, ConfigurationException {
 
 		PongGame game = new PongGame();
 		gamePanel = new GamePanel(game);
@@ -44,8 +49,9 @@ public class GameFrame {
 		frame.getContentPane().add(gamePanel);
 		frame.pack();
 		frame.setVisible(true);
-		InputConfig config = new InputConfig(new FileInputStream(
-		        "resources/com/tgds/pong/ui/playerOptions.properties"));
+		InputConfig<Function> config = new InputConfig<>(new FileInputStream(
+		        "resources/com/tgds/pong/ui/playerOptions.properties"),
+		        Arrays.asList(Function.values()));
 		InputHandler handler = new InputHandler(config,
 		        new PaddleMovementCommandDispatcher(game.getPlayers()));
 		frame.addKeyListener(handler);
@@ -55,8 +61,10 @@ public class GameFrame {
 	 * Main method for running the game.
 	 * 
 	 * @param args
+	 * @throws ConfigurationException
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException,
+	        ConfigurationException {
 		new GameFrame();
 	}
 
