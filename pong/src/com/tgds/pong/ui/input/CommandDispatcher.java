@@ -8,15 +8,17 @@
 package com.tgds.pong.ui.input;
 
 import com.tgds.common.ui.input.Command;
-
+import com.tgds.common.ui.input.InputFunction;
 
 /**
  * The {@code CommandDispatcher} is responsible for creating and executing
  * commands in response to input events.
  * 
  * @author jdl
+ * 
+ * @param <F> the class type which is used to represent input functions
  */
-public interface CommandDispatcher {
+public interface CommandDispatcher<F extends InputFunction> {
 
 	/**
 	 * Issue a command corresponding to a given function. Note that it is up to
@@ -27,5 +29,5 @@ public interface CommandDispatcher {
 	 * @param func the function to dispatch a command for
 	 * @return the command which has been dispatched.
 	 */
-	Command dispatchCommand(PongGameFunction func);
+	Command dispatchCommand(F func);
 }

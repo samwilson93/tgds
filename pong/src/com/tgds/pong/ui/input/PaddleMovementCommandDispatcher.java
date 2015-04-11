@@ -17,7 +17,8 @@ import com.tgds.pong.game.Player;
 /**
  * @author jdl
  */
-public class PaddleMovementCommandDispatcher implements StoppableCommandDispatcher {
+public class PaddleMovementCommandDispatcher implements
+        StoppableCommandDispatcher<PongGameFunction> {
 
 	/** the number of players input is configured for */
 	private final static int PLAYERS = 2;
