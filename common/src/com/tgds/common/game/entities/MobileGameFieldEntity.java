@@ -1,28 +1,26 @@
 /**
- * File:     MobileGameFieldObject.java
+ * File:     MobileGameFieldEntity.java
  * Project:  pong
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game.objects;
+package com.tgds.common.game.entities;
 
 import java.awt.Shape;
 
-import com.tgds.common.game.entities.GameFieldEntity;
-import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
 
 /**
  * Game field objects which can accelerate and decelerate, and have velocities.
- * The velocity of a MobileGameFieldObject is the vector by which the object
+ * The velocity of a MobileGameFieldEntity is the vector by which the object
  * moves in each game tick.
  * 
  * @see GameTimedEntity
  * 
  * @author jdl
  */
-public abstract class MobileGameFieldObject extends GameFieldEntity implements
+public abstract class MobileGameFieldEntity extends GameFieldEntity implements
         GameTimedEntity {
 
 	/**
@@ -62,7 +60,7 @@ public abstract class MobileGameFieldObject extends GameFieldEntity implements
 	 * @param coefficientOfFriction the initial coefficient of friction
 	 * @param friction whether friction should be applied to the object
 	 */
-	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
+	protected MobileGameFieldEntity(Vector loc, Shape shape, boolean solid,
 	        Vector velocity, Vector acceleration, double coefficientOfFriction,
 	        boolean friction)
 	{
@@ -82,7 +80,7 @@ public abstract class MobileGameFieldObject extends GameFieldEntity implements
 	 *            objects bounce off it)
 	 * @param velocity the initial velocity of the object
 	 */
-	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid,
+	protected MobileGameFieldEntity(Vector loc, Shape shape, boolean solid,
 	        Vector velocity) {
 		this(loc, shape, solid, velocity, Vector.cartesian(0.0, 0.0), 0.0,
 		        false);
@@ -97,7 +95,7 @@ public abstract class MobileGameFieldObject extends GameFieldEntity implements
 	 * @param solid whether the object is solid (i.e. whether other solid
 	 *            objects bounce off it)
 	 */
-	protected MobileGameFieldObject(Vector loc, Shape shape, boolean solid) {
+	protected MobileGameFieldEntity(Vector loc, Shape shape, boolean solid) {
 		this(loc, shape, solid, Vector.cartesian(0, 0));
 	}
 

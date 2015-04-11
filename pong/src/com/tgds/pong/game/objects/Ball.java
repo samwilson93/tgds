@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.Shape;
 
 import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.MobileGameFieldEntity;
 import com.tgds.common.util.Vector;
 
 /**
@@ -12,7 +13,7 @@ import com.tgds.common.util.Vector;
  * 
  * @author rae
  */
-public class Ball extends MobileGameFieldObject {
+public class Ball extends MobileGameFieldEntity {
 
 	/** the width of the ball */
 	private static final int WIDTH = 20;
