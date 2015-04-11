@@ -1,11 +1,11 @@
 /**
  * File:     GamePanel.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui;
+package com.tgds.common.ui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -19,10 +19,10 @@ import java.util.Collection;
 
 import javax.swing.JPanel;
 
+import com.tgds.common.game.Game;
 import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
-import com.tgds.pong.game.PongGame;
 
 /**
  * The panel which shows the game.
@@ -34,20 +34,24 @@ public class GamePanel extends JPanel {
 	/** generated UID */
 	private static final long serialVersionUID = -864334892816537343L;
 
-	/** background colour */
-	private static final Color BACKGROUND_COLOUR = Color.BLACK;
+	/** the default background colour if client code doesn't set it */
+	private static final Color DEFAULT_BACKGROUND_COLOUR = Color.BLACK;
+
+	/** the background colour */
+	private Color bgColour = DEFAULT_BACKGROUND_COLOUR;
 
 	/** the game which we are displaying */
-	private final PongGame game;
+	private final Game game;
 
 	/**
 	 * Constructor
 	 */
-	public GamePanel(PongGame game) {
+	public GamePanel(Game game) {
 		this.game = game;
 
-		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
-		setBackground(BACKGROUND_COLOUR);
+		setPreferredSize(new Dimension(game.getField().getWidth(), game
+		        .getField().getHeight()));
+		setBackground(DEFAULT_BACKGROUND_COLOUR);
 
 		game.addTimedObject(new GameTimedEntity() {
 			@Override
@@ -76,7 +80,7 @@ public class GamePanel extends JPanel {
 	 * @param g the graphics instance to paint on
 	 */
 	public void paintBackground(Graphics2D g) {
-		g.setColor(BACKGROUND_COLOUR);
+		g.setColor(getBackgroundColour());
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 
@@ -116,5 +120,19 @@ public class GamePanel extends JPanel {
 			throw new AssertionError(e);
 		}
 		g.transform(transform);
+	}
+
+	/**
+	 * @return the background colour
+	 */
+	public Color getBackgroundColour() {
+		return bgColour;
+	}
+
+	/**
+	 * @param bgColour the background colour to set
+	 */
+	public void setBackgroundColour(Color bgColour) {
+		this.bgColour = bgColour;
 	}
 }

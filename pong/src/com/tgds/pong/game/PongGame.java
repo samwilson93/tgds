@@ -211,6 +211,7 @@ public class PongGame implements Game {
 	/**
 	 * @return the game field
 	 */
+	@Override
 	public GameField getField() {
 		return field;
 	}

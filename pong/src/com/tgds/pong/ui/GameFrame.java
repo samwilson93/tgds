@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 
 import com.tgds.common.config.ConfigurationException;
 import com.tgds.common.config.InputConfig;
+import com.tgds.common.ui.GamePanel;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.Function;
 import com.tgds.pong.ui.input.InputHandler;
