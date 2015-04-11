@@ -20,13 +20,22 @@ import com.tgds.common.game.entities.GameFieldEntity;
  */
 public class GameField {
 	/** the width of the field, in pixels */
-	private static final int WIDTH = 600;
+	private int width;
 	/** the height of the field, in pixels */
-	private static final int HEIGHT = 400;
+	private int height;
 
 	/** the objects in the field */
 	private final Collection<GameFieldEntity> entities =
 	        new ArrayList<GameFieldEntity>();
+
+	/**
+	 * @param width2
+	 * @param height2
+	 */
+	public GameField(int width, int height) {
+		this.width = width;
+		this.height = height;
+	}
 
 	/**
 	 * Add an item to the game field
@@ -57,13 +66,13 @@ public class GameField {
 	 * @return the width of the field
 	 */
 	public int getWidth() {
-		return WIDTH;
+		return width;
 	}
 
 	/**
 	 * @return the height of the field
 	 */
 	public int getHeight() {
-		return HEIGHT;
+		return height;
 	}
 }

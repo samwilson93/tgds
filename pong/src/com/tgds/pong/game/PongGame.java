@@ -26,6 +26,12 @@ import com.tgds.pong.game.objects.Net;
  */
 public class PongGame implements Game {
 
+	/** the width of the game field */
+	private final static int WIDTH = 600;
+
+	/** the height of the game field */
+	private final static int HEIGHT = 400;
+
 	/** The field in which the game takes place. */
 	private GameField field;
 
@@ -48,7 +54,7 @@ public class PongGame implements Game {
 	 * Construct a new game.
 	 */
 	public PongGame() {
-		field = new GameField();
+		field = new GameField(WIDTH, HEIGHT);
 
 		PaddleController p1control = new PaddleController(Side.WEST, this);
 		Player p1 = new Player(p1control);
