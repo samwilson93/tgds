@@ -16,9 +16,9 @@ import javax.swing.JFrame;
 import com.tgds.common.config.ConfigurationException;
 import com.tgds.common.config.InputConfig;
 import com.tgds.common.ui.GamePanel;
+import com.tgds.common.ui.input.KeyboardInputHandler;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.PongGameFunction;
-import com.tgds.pong.ui.input.KeyboardInputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
 /**

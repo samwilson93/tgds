@@ -1,11 +1,11 @@
 /**
  * File:     InputHandler.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui.input;
+package com.tgds.common.ui.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,9 +14,6 @@ import java.util.Map;
 
 import com.tgds.common.config.InputConfig;
 import com.tgds.common.config.KeyMappingException;
-import com.tgds.common.ui.input.InputFunction;
-import com.tgds.common.ui.input.StoppableCommand;
-import com.tgds.common.ui.input.StoppableCommandDispatcher;
 
 /**
  * Handles input from the human players, and converts it into commands which are
@@ -28,10 +25,10 @@ public class KeyboardInputHandler<F extends InputFunction> implements
         KeyListener {
 
 	/** the input configuration */
-	private final InputConfig<PongGameFunction> inputConfig;
+	private final InputConfig<F> inputConfig;
 
 	/** the command issuer, for responding to inputs */
-	private final StoppableCommandDispatcher<PongGameFunction> commandDispatcher;
+	private final StoppableCommandDispatcher<F> commandDispatcher;
 
 	/**
 	 * a mapping of keys pressed to commands issued - whenever a key is pressed
@@ -52,8 +49,8 @@ public class KeyboardInputHandler<F extends InputFunction> implements
 	 *             for any reason - may include failure to read the properties
 	 *             file, or missing or malformed properties within it.
 	 */
-	public KeyboardInputHandler(InputConfig<PongGameFunction> config,
-	        StoppableCommandDispatcher<PongGameFunction> commandDispatcher) {
+	public KeyboardInputHandler(InputConfig<F> config,
+	        StoppableCommandDispatcher<F> commandDispatcher) {
 		inputConfig = config;
 		this.commandDispatcher = commandDispatcher;
 	}
@@ -82,7 +79,7 @@ public class KeyboardInputHandler<F extends InputFunction> implements
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		PongGameFunction func = inputConfig.getFunction(key);
+		F func = inputConfig.getFunction(key);
 		if (func != null) {
 			StoppableCommand cmd = commandDispatcher.dispatchCommand(func);
 			keyCommands.put(key, cmd);
