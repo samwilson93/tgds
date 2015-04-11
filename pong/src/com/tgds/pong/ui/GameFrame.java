@@ -18,7 +18,7 @@ import com.tgds.common.config.InputConfig;
 import com.tgds.common.ui.GamePanel;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.ui.input.PongGameFunction;
-import com.tgds.pong.ui.input.InputHandler;
+import com.tgds.pong.ui.input.KeyboardInputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
 /**
@@ -53,7 +53,7 @@ public class GameFrame {
 		InputConfig<PongGameFunction> config = new InputConfig<>(new FileInputStream(
 		        "resources/com/tgds/pong/ui/playerOptions.properties"),
 		        Arrays.asList(PongGameFunction.values()));
-		InputHandler handler = new InputHandler(config,
+		KeyboardInputHandler handler = new KeyboardInputHandler(config,
 		        new PaddleMovementCommandDispatcher(game.getPlayers()));
 		frame.addKeyListener(handler);
 	}
