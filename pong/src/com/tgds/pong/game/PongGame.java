@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tgds.common.game.Game;
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
-import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
 import com.tgds.pong.game.objects.Net;
 
@@ -95,8 +95,8 @@ public class PongGame implements Game {
 						for (GameTimedObject obj : updateList) {
 							obj.update();
 						}
-						for (GameFieldObject obj : field.getEntities()) {
-							for (GameFieldObject other : field.getEntities()) {
+						for (GameFieldEntity obj : field.getEntities()) {
+							for (GameFieldEntity other : field.getEntities()) {
 								obj.detectCollision(other);
 							}
 						}

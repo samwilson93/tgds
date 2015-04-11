@@ -10,7 +10,7 @@ package com.tgds.pong.game;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.tgds.pong.game.objects.GameFieldObject;
+import com.tgds.common.game.entities.GameFieldEntity;
 
 /**
  * The field in which the game takes place. Contains all the objects in the
@@ -25,15 +25,15 @@ public class GameField {
 	private static final int HEIGHT = 400;
 
 	/** the objects in the field */
-	private final Collection<GameFieldObject> entities =
-	        new ArrayList<GameFieldObject>();
+	private final Collection<GameFieldEntity> entities =
+	        new ArrayList<GameFieldEntity>();
 
 	/**
 	 * Add an item to the game field
 	 * 
 	 * @param item the item to add
 	 */
-	public void addEntity(GameFieldObject item) {
+	public void addEntity(GameFieldEntity item) {
 		entities.add(item);
 	}
 
@@ -42,14 +42,14 @@ public class GameField {
 	 * 
 	 * @param item the item to remove
 	 */
-	public void removeEntity(GameFieldObject item) {
+	public void removeEntity(GameFieldEntity item) {
 		entities.remove(item);
 	}
 
 	/**
 	 * @return the collection of entities in the field
 	 */
-	public Collection<GameFieldObject> getEntities() {
+	public Collection<GameFieldEntity> getEntities() {
 		return entities;
 	}
 

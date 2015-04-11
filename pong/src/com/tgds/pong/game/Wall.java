@@ -3,10 +3,10 @@ package com.tgds.pong.game;
 import java.awt.Color;
 import java.awt.Rectangle;
 
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
-import com.tgds.pong.game.objects.GameFieldObject;
 
-public class Wall extends GameFieldObject {
+public class Wall extends GameFieldEntity {
 
 	/** the height of the paddle */
 	private static final int HEIGHT = 1;
@@ -28,7 +28,7 @@ public class Wall extends GameFieldObject {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		// TODO Auto-generated method stub
 		return false;
 	}

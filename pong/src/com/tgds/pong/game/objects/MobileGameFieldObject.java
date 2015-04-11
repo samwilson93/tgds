@@ -9,6 +9,7 @@ package com.tgds.pong.game.objects;
 
 import java.awt.Shape;
 
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 
 /**
@@ -20,7 +21,7 @@ import com.tgds.common.util.Vector;
  * 
  * @author jdl
  */
-public abstract class MobileGameFieldObject extends GameFieldObject implements
+public abstract class MobileGameFieldObject extends GameFieldEntity implements
         GameTimedObject {
 
 	/**
@@ -205,7 +206,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		if (this.checkCollision(other))
 		{
 			// TODO: REACT

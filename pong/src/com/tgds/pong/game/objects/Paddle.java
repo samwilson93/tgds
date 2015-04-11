@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 
 /**
@@ -42,7 +43,7 @@ public class Paddle extends MobileGameFieldObject {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		if (this.checkCollision(other))
 		{
 			// TODO: REACT

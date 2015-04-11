@@ -1,10 +1,10 @@
 package com.tgds.pong.game.controllers;
 
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Wall;
 import com.tgds.pong.game.objects.Ball;
-import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.Paddle;
 
 public class BallController {
@@ -65,7 +65,7 @@ public class BallController {
 
 	}
 	
-	public void reactToCollision(GameFieldObject otherObject) {
+	public void reactToCollision(GameFieldEntity otherObject) {
 		Class<?> otherClass = otherObject.getClass();
 		if (otherClass == Paddle.class) {
 			Vector initialVelocity = ball.getVelocity();

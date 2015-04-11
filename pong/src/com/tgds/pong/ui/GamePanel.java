@@ -19,9 +19,9 @@ import java.util.Collection;
 
 import javax.swing.JPanel;
 
+import com.tgds.common.game.entities.GameFieldEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.GameTimedObject;
 
 /**
@@ -87,8 +87,8 @@ public class GamePanel extends JPanel {
 	 */
 	private void paintFieldObjects(Graphics2D g) {
 		g.setColor(Color.WHITE);
-		Collection<GameFieldObject> field = game.getField().getEntities();
-		for (GameFieldObject obj : field) {
+		Collection<GameFieldEntity> field = game.getField().getEntities();
+		for (GameFieldEntity obj : field) {
 			paintFieldObject(g, obj);
 		}
 	}
@@ -99,7 +99,7 @@ public class GamePanel extends JPanel {
 	 * @param g the graphics instance to paint on
 	 * @param obj the game object to paint
 	 */
-	private void paintFieldObject(Graphics2D g, GameFieldObject obj) {
+	private void paintFieldObject(Graphics2D g, GameFieldEntity obj) {
 		Color colour = obj.getColour();
 		g.setColor(colour);
 		Shape s = obj.getShape();
