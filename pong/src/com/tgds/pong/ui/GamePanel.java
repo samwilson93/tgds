@@ -20,9 +20,9 @@ import java.util.Collection;
 import javax.swing.JPanel;
 
 import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.game.objects.GameTimedObject;
 
 /**
  * The panel which shows the game.
@@ -49,7 +49,7 @@ public class GamePanel extends JPanel {
 		setPreferredSize(new Dimension(game.getWidth(), game.getHeight()));
 		setBackground(BACKGROUND_COLOUR);
 
-		game.addTimedObject(new GameTimedObject() {
+		game.addTimedObject(new GameTimedEntity() {
 			@Override
 			public void update() {
 				repaint();

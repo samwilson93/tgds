@@ -12,11 +12,11 @@ import java.util.List;
 
 import com.tgds.common.game.Game;
 import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
 import com.tgds.pong.game.controllers.BallController;
 import com.tgds.pong.game.controllers.PaddleController;
-import com.tgds.pong.game.objects.GameTimedObject;
 import com.tgds.pong.game.objects.Net;
 
 /**
@@ -36,7 +36,7 @@ public class PongGame implements Game {
 	private BallController ballController = null;
 
 	/** all the objects within the game that update with time */
-	private final List<GameTimedObject> updateList = new ArrayList<>();
+	private final List<GameTimedEntity> updateList = new ArrayList<>();
 
 	/** the players playing the game */
 	private final List<Player> players = new ArrayList<>();
@@ -92,7 +92,7 @@ public class PongGame implements Game {
 			public void run() {
 				while (true) {
 					if (isRunning()) {
-						for (GameTimedObject obj : updateList) {
+						for (GameTimedEntity obj : updateList) {
 							obj.update();
 						}
 						for (GameFieldEntity obj : field.getEntities()) {
@@ -130,7 +130,7 @@ public class PongGame implements Game {
 	 * 
 	 * @param object the game object to add
 	 */
-	public void addTimedObject(GameTimedObject object) {
+	public void addTimedObject(GameTimedEntity object) {
 		updateList.add(object);
 	}
 
@@ -139,7 +139,7 @@ public class PongGame implements Game {
 	 * 
 	 * @param object the object to remove
 	 */
-	public void removeTimedObject(GameTimedObject object) {
+	public void removeTimedObject(GameTimedEntity object) {
 		updateList.remove(object);
 	}
 

@@ -1,6 +1,6 @@
 /**
- * File:     GameFieldObject.java
- * Project:  pong
+ * File:     GameFieldEntity.java
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 

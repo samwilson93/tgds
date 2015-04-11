@@ -10,6 +10,7 @@ package com.tgds.pong.game.objects;
 import java.awt.Shape;
 
 import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.GameTimedEntity;
 import com.tgds.common.util.Vector;
 
 /**
@@ -17,12 +18,12 @@ import com.tgds.common.util.Vector;
  * The velocity of a MobileGameFieldObject is the vector by which the object
  * moves in each game tick.
  * 
- * @see GameTimedObject
+ * @see GameTimedEntity
  * 
  * @author jdl
  */
 public abstract class MobileGameFieldObject extends GameFieldEntity implements
-        GameTimedObject {
+        GameTimedEntity {
 
 	/**
 	 * the maximum speed of the object, measured in pixels. The object will not
