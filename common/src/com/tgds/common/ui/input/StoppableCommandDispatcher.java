@@ -1,14 +1,11 @@
 /**
  * File:     StoppableCommandDispatcher.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui.input;
-
-import com.tgds.common.ui.input.InputFunction;
-import com.tgds.common.ui.input.StoppableCommand;
+package com.tgds.common.ui.input;
 
 /**
  * Command dispatcher specifically for dispatching stoppable commands: i.e.

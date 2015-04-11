@@ -15,6 +15,7 @@ import java.util.Map;
 import com.tgds.common.config.InputConfig;
 import com.tgds.common.config.KeyMappingException;
 import com.tgds.common.ui.input.StoppableCommand;
+import com.tgds.common.ui.input.StoppableCommandDispatcher;
 
 /**
  * Handles input from the human players, and converts it into commands which are
