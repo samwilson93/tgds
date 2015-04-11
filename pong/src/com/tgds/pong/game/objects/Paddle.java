@@ -26,6 +26,9 @@ public class Paddle extends MobileGameFieldObject {
 	/** the height of the paddle */
 	private static final int HEIGHT = 100;
 
+	/** the number of pixels the paddle moves each move */
+	private static final int SPEED = 5;
+
 	/**
 	 * Construct a new paddle
 	 * 
@@ -40,7 +43,14 @@ public class Paddle extends MobileGameFieldObject {
 	 */
 	@Override
 	public boolean detectCollision(GameFieldObject other) {
-		// TODO implement as part of issue #4
+		if (this.checkCollision(other))
+		{
+			// TODO: REACT
+			return true;
+		} else if (!this.checkCollision(other)) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -59,7 +69,7 @@ public class Paddle extends MobileGameFieldObject {
 	 */
 	@Override
 	public Color getColour() {
+		// TODO Auto-generated method stub
 		return Color.WHITE;
 	}
-
 }
