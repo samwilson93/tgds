@@ -7,8 +7,8 @@
  */
 package com.tgds.pong.commands;
 
+import com.tgds.common.ui.input.Command;
 import com.tgds.pong.game.Player;
-import com.tgds.pong.ui.input.Command;
 
 /**
  * A game command. Handles execution of the command, and keeps a record of the

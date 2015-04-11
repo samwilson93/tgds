@@ -9,6 +9,7 @@ package com.tgds.pong.ui.input;
 
 import java.util.List;
 
+import com.tgds.common.ui.input.StoppableCommand;
 import com.tgds.pong.commands.PaddleMoveCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;
@@ -40,7 +41,7 @@ public class PaddleMovementCommandDispatcher implements StoppableCommandDispatch
 	 * {@inheritDoc}
 	 */
 	@Override
-	public StoppableCommand dispatchCommand(Function func) {
+	public StoppableCommand dispatchCommand(PongGameFunction func) {
 		Player player = decodePlayer(func);
 		Direction direction;
 		if (func != null) {
@@ -70,7 +71,7 @@ public class PaddleMovementCommandDispatcher implements StoppableCommandDispatch
 	 * @return the player who pressed the key (or null, if the key does not
 	 *         correspond to a particular player)
 	 */
-	private Player decodePlayer(Function func) {
+	private Player decodePlayer(PongGameFunction func) {
 		if (func == null) {
 			return null;
 		}

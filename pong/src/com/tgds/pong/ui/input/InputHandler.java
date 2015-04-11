@@ -14,6 +14,7 @@ import java.util.Map;
 
 import com.tgds.common.config.InputConfig;
 import com.tgds.common.config.KeyMappingException;
+import com.tgds.common.ui.input.StoppableCommand;
 
 /**
  * Handles input from the human players, and converts it into commands which are
@@ -24,7 +25,7 @@ import com.tgds.common.config.KeyMappingException;
 public class InputHandler implements KeyListener {
 
 	/** the input configuration */
-	private final InputConfig<Function> inputConfig;
+	private final InputConfig<PongGameFunction> inputConfig;
 
 	/** the command issuer, for responding to inputs */
 	private final StoppableCommandDispatcher commandDispatcher;
@@ -48,7 +49,7 @@ public class InputHandler implements KeyListener {
 	 *             for any reason - may include failure to read the properties
 	 *             file, or missing or malformed properties within it.
 	 */
-	public InputHandler(InputConfig<Function> config,
+	public InputHandler(InputConfig<PongGameFunction> config,
 	        StoppableCommandDispatcher commandDispatcher) {
 		inputConfig = config;
 		this.commandDispatcher = commandDispatcher;
@@ -78,7 +79,7 @@ public class InputHandler implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		Function func = inputConfig.getFunction(key);
+		PongGameFunction func = inputConfig.getFunction(key);
 		if (func != null) {
 			StoppableCommand cmd = commandDispatcher.dispatchCommand(func);
 			keyCommands.put(key, cmd);

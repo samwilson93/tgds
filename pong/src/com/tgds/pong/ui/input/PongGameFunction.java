@@ -14,7 +14,7 @@ import com.tgds.common.ui.input.InputFunction;
  * 
  * @author jdl
  */
-public enum Function implements InputFunction {
+public enum PongGameFunction implements InputFunction {
 	UP_1("player1-up", 0),
 	UP_2("player2-up", 1),
 	DOWN_1("player1-down", 0),
@@ -33,7 +33,7 @@ public enum Function implements InputFunction {
 	public int playerIndex;
 
 	/** constructor */
-	private Function(String property, int playerIndex) {
+	private PongGameFunction(String property, int playerIndex) {
 		this.propertyName = property;
 		this.playerIndex = playerIndex;
 	}

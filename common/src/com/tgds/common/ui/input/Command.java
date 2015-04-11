@@ -1,13 +1,16 @@
 /**
  * File:     Command.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui.input;
+package com.tgds.common.ui.input;
 
 /**
+ * Interface for player commands. Contains one method, which is the method
+ * called by the game to execute the command.
+ * 
  * @author jdl
  */
 public interface Command {

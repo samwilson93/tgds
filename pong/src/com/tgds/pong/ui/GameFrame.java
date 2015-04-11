@@ -17,7 +17,7 @@ import com.tgds.common.config.ConfigurationException;
 import com.tgds.common.config.InputConfig;
 import com.tgds.common.ui.GamePanel;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.ui.input.Function;
+import com.tgds.pong.ui.input.PongGameFunction;
 import com.tgds.pong.ui.input.InputHandler;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
 
@@ -50,9 +50,9 @@ public class GameFrame {
 		frame.getContentPane().add(gamePanel);
 		frame.pack();
 		frame.setVisible(true);
-		InputConfig<Function> config = new InputConfig<>(new FileInputStream(
+		InputConfig<PongGameFunction> config = new InputConfig<>(new FileInputStream(
 		        "resources/com/tgds/pong/ui/playerOptions.properties"),
-		        Arrays.asList(Function.values()));
+		        Arrays.asList(PongGameFunction.values()));
 		InputHandler handler = new InputHandler(config,
 		        new PaddleMovementCommandDispatcher(game.getPlayers()));
 		frame.addKeyListener(handler);

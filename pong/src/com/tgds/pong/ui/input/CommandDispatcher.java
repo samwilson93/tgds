@@ -7,6 +7,8 @@
  */
 package com.tgds.pong.ui.input;
 
+import com.tgds.common.ui.input.Command;
+
 
 /**
  * The {@code CommandDispatcher} is responsible for creating and executing
@@ -25,5 +27,5 @@ public interface CommandDispatcher {
 	 * @param func the function to dispatch a command for
 	 * @return the command which has been dispatched.
 	 */
-	Command dispatchCommand(Function func);
+	Command dispatchCommand(PongGameFunction func);
 }

@@ -7,6 +7,8 @@
  */
 package com.tgds.pong.ui.input;
 
+import com.tgds.common.ui.input.StoppableCommand;
+
 
 /**
  * Command dispatcher specifically for dispatching stoppable commands: i.e.
@@ -25,5 +27,5 @@ public interface StoppableCommandDispatcher extends CommandDispatcher {
 	 * @return the stoppable command which has been dispatched
 	 */
 	@Override
-	StoppableCommand dispatchCommand(Function func);
+	StoppableCommand dispatchCommand(PongGameFunction func);
 }
