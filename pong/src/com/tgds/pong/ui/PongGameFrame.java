@@ -11,51 +11,40 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import javax.swing.JFrame;
-
 import com.tgds.common.config.ConfigurationException;
 import com.tgds.common.config.InputConfig;
-import com.tgds.common.ui.GamePanel;
+import com.tgds.common.ui.GameFrame;
 import com.tgds.common.ui.input.KeyboardInputHandler;
 import com.tgds.pong.game.PongGame;
-import com.tgds.pong.ui.input.PongGameFunction;
 import com.tgds.pong.ui.input.PaddleMovementCommandDispatcher;
+import com.tgds.pong.ui.input.PongGameFunction;
 
 /**
  * Main frame and method for the game of Pong.
  * 
  * @author jdl
  */
-public class GameFrame {
-
-	/** the panel containing the main game */
-	private final GamePanel gamePanel;
-
-	/** the frame holding it all together */
-	private final JFrame frame;
+public class PongGameFrame extends GameFrame {
 
 	/**
 	 * Constructor. Build the frame and show it.
 	 * 
 	 * @throws ConfigurationException
 	 */
-	private GameFrame() throws IOException, ConfigurationException {
+	private PongGameFrame() throws IOException, ConfigurationException {
+		super("pong");
 
 		PongGame game = new PongGame();
-		gamePanel = new GamePanel(game);
+		super.setGame(game);
 
-		frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Pong");
-		frame.getContentPane().add(gamePanel);
-		frame.pack();
-		frame.setVisible(true);
-		InputConfig<PongGameFunction> config = new InputConfig<>(new FileInputStream(
-		        "resources/com/tgds/pong/ui/playerOptions.properties"),
+		InputConfig<PongGameFunction> config = new InputConfig<>(
+		        new FileInputStream(
+		                "resources/com/tgds/pong/ui/playerOptions.properties"),
 		        Arrays.asList(PongGameFunction.values()));
-		KeyboardInputHandler handler = new KeyboardInputHandler(config,
+		KeyboardInputHandler<PongGameFunction> handler = new KeyboardInputHandler<>(
+		        config,
 		        new PaddleMovementCommandDispatcher(game.getPlayers()));
-		frame.addKeyListener(handler);
+		super.addKeyboardInputHandler(handler);
 	}
 
 	/**
@@ -66,7 +55,6 @@ public class GameFrame {
 	 */
 	public static void main(String[] args) throws IOException,
 	        ConfigurationException {
-		new GameFrame();
+		new PongGameFrame();
 	}
-
 }
