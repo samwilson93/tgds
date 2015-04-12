@@ -1,19 +1,21 @@
 /**
  * File:     StoppableCommandDispatcher.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui.input;
+package com.tgds.common.ui.input;
 
 /**
  * Command dispatcher specifically for dispatching stoppable commands: i.e.
  * commands which remain in effect until stopped.
  * 
  * @author jdl
+ * @param <F> the class type which represents input functions in the game.
  */
-public interface StoppableCommandDispatcher extends CommandDispatcher {
+public interface StoppableCommandDispatcher<F extends InputFunction> extends
+        CommandDispatcher<F> {
 
 	/**
 	 * Issue a command corresponding to a given function, which is stoppable.
@@ -24,5 +26,5 @@ public interface StoppableCommandDispatcher extends CommandDispatcher {
 	 * @return the stoppable command which has been dispatched
 	 */
 	@Override
-	StoppableCommand dispatchCommand(Function func);
+	StoppableCommand dispatchCommand(F func);
 }

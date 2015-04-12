@@ -10,13 +10,13 @@ package com.tgds.pong.game.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.util.Vector;
 import com.tgds.pong.commands.PlayerInputReceiver;
-import com.tgds.pong.game.Game;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Side;
-import com.tgds.pong.game.Vector;
 import com.tgds.pong.game.Wall;
 import com.tgds.pong.game.objects.Ball;
-import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.Paddle;
 
 /**
@@ -57,7 +57,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 * @param game the game in which this controller sits
 	 * @param side the side of the playing field on which this controller
 	 */
-	public PaddleController(Side side, Game game) {
+	public PaddleController(Side side, PongGame game) {
 		int x, y;
 		switch (side) {
 			case WEST:
@@ -91,7 +91,7 @@ public class PaddleController implements PlayerInputReceiver {
 	 * 
 	 * @param other the other object
 	 */
-	private void reactCollision(GameFieldObject other) {
+	private void reactCollision(GameFieldEntity other) {
 		Class<?> otherClass = other.getClass();
 		if (otherClass == Wall.class) {
 			Vector noVelocity = Vector.cartesian(0, 0);

@@ -4,14 +4,16 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.MobileGameFieldEntity;
+import com.tgds.common.util.Vector;
 
 /**
  * The ball used to score. Changes velocity only when hitting walls or paddles.
  * 
  * @author rae
  */
-public class Ball extends MobileGameFieldObject {
+public class Ball extends MobileGameFieldEntity {
 
 	/** the width of the ball */
 	private static final int WIDTH = 20;
@@ -31,7 +33,7 @@ public class Ball extends MobileGameFieldObject {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		if(this.checkCollision(other))
 		{
 			//TODO: REACT

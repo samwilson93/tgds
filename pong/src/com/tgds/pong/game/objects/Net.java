@@ -11,14 +11,15 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.util.Vector;
 
 /**
  * The court's net - a decorative object showing the centre of the court
  * 
  * @author jdl
  */
-public class Net extends GameFieldObject {
+public class Net extends GameFieldEntity {
 
 	/** the thickness of a net in pixels */
 	private static final int NET_THICKNESS = 2;
@@ -37,7 +38,7 @@ public class Net extends GameFieldObject {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		// No response to a collision
 		return false;
 	}

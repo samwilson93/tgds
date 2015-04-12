@@ -1,17 +1,17 @@
 /**
- * File:     GameFieldObject.java
- * Project:  pong
+ * File:     GameFieldEntity.java
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game.objects;
+package com.tgds.common.game.entities;
 
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.util.Vector;
 
 /**
  * An item that may appear in the game field. Consists primarily of a shape and
@@ -21,7 +21,7 @@ import com.tgds.pong.game.Vector;
  * 
  * @author jdl
  */
-public abstract class GameFieldObject {
+public abstract class GameFieldEntity {
 
 	/** the location of this object, within its field. */
 	private Vector loc;
@@ -42,7 +42,7 @@ public abstract class GameFieldObject {
 	 * @param shope the shape of the object
 	 * @param solid whether the object is solid
 	 */
-	protected GameFieldObject(Vector loc, Shape shape, boolean solid) {
+	protected GameFieldEntity(Vector loc, Shape shape, boolean solid) {
 		this.loc = loc;
 		this.shape = shape;
 		this.solid = solid;
@@ -54,7 +54,7 @@ public abstract class GameFieldObject {
 	 * @param other another gameFieldObject to check for collisions with
 	 * @return true if the two objects intersect
 	 */
-	public boolean checkCollision(GameFieldObject other) {
+	public boolean checkCollision(GameFieldEntity other) {
 		Shape thisShape = this.getShape();
 		Shape otherShape = other.getShape();
 
@@ -79,7 +79,7 @@ public abstract class GameFieldObject {
 	 * @param other the object it may be colliding with
 	 * @return returns true if function has acted correctly
 	 */
-	public abstract boolean detectCollision(GameFieldObject other);
+	public abstract boolean detectCollision(GameFieldEntity other);
 
 	/**
 	 * Translate the location of this object within its field.

@@ -1,11 +1,11 @@
 /**
- * File:     GameTimedObject.java
- * Project:  pong
+ * File:     GameTimedEntity.java
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game.objects;
+package com.tgds.common.game.entities;
 
 /**
  * Any item in the game which updates on a timed basis. Game time is counted in
@@ -14,7 +14,7 @@ package com.tgds.pong.game.objects;
  * 
  * @author jdl
  */
-public interface GameTimedObject {
+public interface GameTimedEntity {
 
 	/**
 	 * update the object

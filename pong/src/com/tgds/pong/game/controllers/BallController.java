@@ -1,10 +1,10 @@
 package com.tgds.pong.game.controllers;
 
-import com.tgds.pong.game.Game;
-import com.tgds.pong.game.Vector;
+import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.util.Vector;
+import com.tgds.pong.game.PongGame;
 import com.tgds.pong.game.Wall;
 import com.tgds.pong.game.objects.Ball;
-import com.tgds.pong.game.objects.GameFieldObject;
 import com.tgds.pong.game.objects.Paddle;
 
 public class BallController {
@@ -24,7 +24,7 @@ public class BallController {
 	 * @param game the game in which this controller sits
 	 * @param side the side of the playing field on which this controller
 	 */
-	public BallController(Game game) {
+	public BallController(PongGame game) {
 		int x, y;
 
 		x = game.getHorizontalCentre();
@@ -65,7 +65,7 @@ public class BallController {
 
 	}
 	
-	public void reactToCollision(GameFieldObject otherObject) {
+	public void reactToCollision(GameFieldEntity otherObject) {
 		Class<?> otherClass = otherObject.getClass();
 		if (otherClass == Paddle.class) {
 			Vector initialVelocity = ball.getVelocity();

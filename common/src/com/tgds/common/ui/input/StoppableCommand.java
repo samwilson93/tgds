@@ -1,11 +1,12 @@
 /**
  * File:     StoppableCommand.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.ui.input;
+package com.tgds.common.ui.input;
+
 
 /**
  * A command which has a concept of being stopped. This type of command is one

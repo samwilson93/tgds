@@ -1,11 +1,11 @@
 /**
  * File:     Vector.java
- * Project:  pong
+ * Project:  common
  * 
  * Copyright Templecombe Game Development Society, 2015.
  * All rights reserved. 
  */
-package com.tgds.pong.game;
+package com.tgds.common.util;
 
 import java.awt.Point;
 

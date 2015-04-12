@@ -11,7 +11,9 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Shape;
 
-import com.tgds.pong.game.Vector;
+import com.tgds.common.game.entities.GameFieldEntity;
+import com.tgds.common.game.entities.MobileGameFieldEntity;
+import com.tgds.common.util.Vector;
 
 /**
  * The paddles used to hit the ball and defend the goal. Respond to player
@@ -19,7 +21,7 @@ import com.tgds.pong.game.Vector;
  * 
  * @author jdl
  */
-public class Paddle extends MobileGameFieldObject {
+public class Paddle extends MobileGameFieldEntity {
 
 	/** the width of the paddle */
 	private static final int WIDTH = 20;
@@ -42,7 +44,7 @@ public class Paddle extends MobileGameFieldObject {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean detectCollision(GameFieldObject other) {
+	public boolean detectCollision(GameFieldEntity other) {
 		if (this.checkCollision(other))
 		{
 			// TODO: REACT
