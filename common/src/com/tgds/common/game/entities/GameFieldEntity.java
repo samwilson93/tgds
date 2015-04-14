@@ -60,12 +60,8 @@ public abstract class GameFieldEntity {
 
 		Rectangle2D thisRect = thisShape.getBounds2D();
 		Rectangle2D otherRect = otherShape.getBounds2D();
-
-		if (thisRect.getX() < otherRect.getX() + otherRect.getWidth() &&
-		        thisRect.getX() + thisRect.getWidth() > otherRect.getCenterX()
-		        &&
-		        thisRect.getY() < otherRect.getY() + otherRect.getHeight() &&
-		        thisRect.getHeight() + thisRect.getY() > otherRect.getY()) {
+		
+		if (thisRect.intersects(otherRect)) {
 			System.out.println("" + this + "\t\t collided with \t\t" + other);
 			return true;
 		}
