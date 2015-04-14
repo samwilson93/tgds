@@ -104,13 +104,19 @@ public class PongGame implements Game {
 						}
 						for (GameFieldEntity obj : field.getEntities()) {
 							for (GameFieldEntity other : field.getEntities()) {
+								if (obj == other) {
+									continue;
+								}
+								
 								obj.detectCollision(other);
 							}
 						}
+						
 						if (players.get(0).getScore() == 10
 						        || players.get(1).getScore() == 10) {
 							setRunning(false);
 						}
+						
 						try {
 							Thread.sleep(stepTime);
 						} catch (InterruptedException e) {
