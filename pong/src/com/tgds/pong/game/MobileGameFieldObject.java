@@ -196,14 +196,7 @@ public abstract class MobileGameFieldObject extends GameFieldObject implements
 	 */
 	@Override
 	public boolean detectCollision(GameFieldObject other) {
-		if(this.checkCollision(other))
-		{
-			//TODO: REACT
-			return true;
-		} else if (!this.checkCollision(other)) {
-			return true;
-		}
-		
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

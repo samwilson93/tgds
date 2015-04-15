@@ -33,14 +33,7 @@ public class Ball extends MobileGameFieldObject {
 	 */
 	@Override
 	public boolean detectCollision(GameFieldObject other) {
-		if(this.checkCollision(other))
-		{
-			//TODO: REACT
-			return true;
-		} else if (!this.checkCollision(other)) {
-			return true;
-		}
-		
+		// TODO implement as part of issue #4
 		return false;
 	}
 
