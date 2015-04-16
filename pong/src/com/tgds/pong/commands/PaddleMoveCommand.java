@@ -7,13 +7,14 @@
  */
 package com.tgds.pong.commands;
 
+import com.tgds.common.ui.input.StoppableCommand;
 import com.tgds.pong.commands.PlayerInputReceiver.Direction;
 import com.tgds.pong.game.Player;
 
 /**
  * @author jdl
  */
-public class PaddleMoveCommand extends Command {
+public class PaddleMoveCommand extends PongCommand implements StoppableCommand {
 
 	/** the direction of the movement */
 	private final Direction direction;
@@ -33,5 +34,14 @@ public class PaddleMoveCommand extends Command {
 	@Override
 	public void execute() {
 		getPlayer().getInputReceiver().movePaddle(direction);
+	}
+
+	/**
+	 * Stop the movement command, by ordering the player input receiver to stop
+	 * moving the paddle.
+	 */
+	@Override
+	public void stop() {
+		getPlayer().getInputReceiver().stopPaddle();
 	}
 }
